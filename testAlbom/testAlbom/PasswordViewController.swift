@@ -125,11 +125,8 @@ class PasswordViewController: UIViewController {
         } else {
             //check login pasword
             if checkLoginPassword(loginText.text!, password: passwordText.text!)
-            { let alertView = UIAlertController(title: "Login",
-                                                message: "username or password" as String, preferredStyle:.Alert)
-                let okAction = UIAlertAction(title: "Next!", style: .Default, handler: nil)
-                alertView.addAction(okAction)
-                self.presentViewController(alertView, animated: true, completion: nil)
+            {   let CategoryController: CategoryViewController = CategoryViewController()
+                navigationController?.pushViewController(CategoryController, animated: true)
             } else {
               let alertView = UIAlertController(title: "Login Problem",
                                          message: "Wrong username or password." as String, preferredStyle:.Alert)
@@ -137,8 +134,7 @@ class PasswordViewController: UIViewController {
               alertView.addAction(okAction)
               self.presentViewController(alertView, animated: true, completion: nil)
             }
-            
-        }
+          }
         }
        loginText.text = ""
        passwordText.text = ""
