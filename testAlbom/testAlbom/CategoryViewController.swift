@@ -47,7 +47,7 @@ class CategoryViewController: UITabBarController {
 extension CategoryViewController: UITabBarControllerDelegate {
 
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-        print("press item \(viewController.nibName)")
+
     }
 }
 

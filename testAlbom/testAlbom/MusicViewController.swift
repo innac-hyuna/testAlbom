@@ -92,17 +92,19 @@ extension MusicViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        do {
+       
+         do {
             try audioPlayer = AVAudioPlayer(contentsOfURL: arrList[indexPath.row].1)
         } catch {
             let fetchError = error as NSError
             print(fetchError)
         }
-        dispatch_async(dispatch_get_main_queue(), {
-             self.audioPlayer.play()
-              print("play")})
         
-     
+      
+        dispatch_async(dispatch_get_main_queue(), {
+            self.audioPlayer.prepareToPlay()
+            self.audioPlayer.play()
+              print("play")})
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

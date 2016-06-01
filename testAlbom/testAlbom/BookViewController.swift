@@ -15,14 +15,13 @@ class BookViewController: UIViewController {
     var arr = ["Book", "Book1", "Book2", "Book3", "Book4", "Book5", "Book6"]
     var arrList = [(String, NSURL)]()
     var compactConstraint: [NSLayoutConstraint] = []
+    var docController: UIDocumentInteractionController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         for aBook in arr {
-        if let path = NSBundle.mainBundle().URLForResource(aBook, withExtension: "pdf", subdirectory: nil, localization: nil) {
-            arrList.append((aBook, path)) }}
-        
+        if let path = NSBundle.mainBundle().URLForResource(aBook, withExtension: "pdf", subdirectory: nil, localization: nil) { arrList.append((aBook, path)) }}
 
         tableView = UITableView()
         tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -32,7 +31,6 @@ class BookViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         setLayout()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,9 +91,14 @@ extension BookViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        let WebController: WebViewController = WebViewController()
-        WebController.urlBook = arrList[indexPath.row].1
-        navigationController?.pushViewController(WebController, animated: true)        
+       let WebController: WebViewController = WebViewController()
+       WebController.urlBook = arrList[indexPath.row].1
+       navigationController?.pushViewController(WebController, animated: true)
+
+       /*let interactionController = UIDocumentInteractionController(URL:arrList[indexPath.row].1)
+       interactionController.presentOptionsMenuFromRect(CGRectZero,
+                                                         inView:self.view, animated:false)*/
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

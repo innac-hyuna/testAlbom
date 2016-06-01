@@ -99,6 +99,7 @@ class PasswordViewController: UIViewController {
     }
     
     func loginButtonAction (sender: UIButton) {
+        
         if loginText.text == "" || passwordText.text == ""
         { let alertView = UIAlertController(title: "Login Problem",
                                              message: "Wrong username or password." as String, preferredStyle:.Alert)
@@ -107,13 +108,20 @@ class PasswordViewController: UIViewController {
           self.presentViewController(alertView, animated: true, completion: nil)
           return
         }
-     
-        loginText.resignFirstResponder()
-        passwordText.resignFirstResponder()
         
-        if let loginDefault =  NSUserDefaults.standardUserDefaults().valueForKey("loginkey"){
-           
-            if loginDefault as! String == "" {
+        if NSUserDefaults.standardUserDefaults().valueForKey("loginkey") != nil  {
+            //check login pasword
+            if checkLoginPassword(loginText.text!, password: passwordText.text!)
+            {   let CategoryController: CategoryViewController = CategoryViewController()
+                navigationController?.pushViewController(CategoryController, animated: true)
+            } else {
+                let alertView = UIAlertController(title: "Login Problem",
+                                                  message: "Wrong username or password." as String, preferredStyle:.Alert)
+                let okAction = UIAlertAction(title: "Foiled Again!", style: .Default, handler: nil)
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: true, completion: nil)
+            }
+        } else {
             // Save login password
             if passwordText.text?.characters.count > 0 {
                 if keychain.set(passwordText.text!, forKey: "passwordkey") {
@@ -122,20 +130,8 @@ class PasswordViewController: UIViewController {
                 }
             } else {
                 print("not save ")}
-        } else {
-            //check login pasword
-            if checkLoginPassword(loginText.text!, password: passwordText.text!)
-            {   let CategoryController: CategoryViewController = CategoryViewController()
-                navigationController?.pushViewController(CategoryController, animated: true)
-            } else {
-              let alertView = UIAlertController(title: "Login Problem",
-                                         message: "Wrong username or password." as String, preferredStyle:.Alert)
-              let okAction = UIAlertAction(title: "Foiled Again!", style: .Default, handler: nil)
-              alertView.addAction(okAction)
-              self.presentViewController(alertView, animated: true, completion: nil)
-            }
-          }
         }
+        
        loginText.text = ""
        passwordText.text = ""
 
@@ -170,7 +166,7 @@ class PasswordViewController: UIViewController {
             toItem: view,
             attribute: NSLayoutAttribute.CenterY,
             multiplier: 1.0,
-            constant: 0))
+            constant: 20))
         compactConstraint.append(NSLayoutConstraint(
             item: mainView,
             attribute: NSLayoutAttribute.CenterX,
