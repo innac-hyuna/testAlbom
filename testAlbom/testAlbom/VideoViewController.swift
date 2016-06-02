@@ -15,9 +15,12 @@ class VideoViewController: UIViewController {
     var urlVideo: NSURL!
     var compactConstraints: [NSLayoutConstraint] = []
     var playerController: AVPlayerViewController!
+    var topBar: UILayoutSupport!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        topBar = self.topLayoutGuide
         
         let player = AVPlayer(URL: urlVideo)
         playerController = AVPlayerViewController()
@@ -25,7 +28,6 @@ class VideoViewController: UIViewController {
         self.addChildViewController(playerController)
         self.view.addSubview(playerController.view)        
         playerController.view.frame = self.view.frame
-        
         player.play()
 
     }
@@ -44,10 +46,10 @@ class VideoViewController: UIViewController {
         compactConstraints.append(NSLayoutConstraint(item: playerController.view,
             attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
-            toItem: view,
-            attribute: NSLayoutAttribute.Top,
+            toItem: topBar,
+            attribute: NSLayoutAttribute.BottomMargin,
             multiplier: 1.0,
-            constant: 0))
+            constant: 15))
         compactConstraints.append(NSLayoutConstraint(item: playerController.view,
             attribute: NSLayoutAttribute.Bottom,
             relatedBy: NSLayoutRelation.Equal,

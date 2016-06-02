@@ -13,7 +13,6 @@ class WebViewController: UIViewController {
     var webBook: UIWebView!
     var urlBook: NSURL!
     var compactConstraints: [NSLayoutConstraint] = []
-   // var regularConstraints: [NSLayoutConstraint]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +21,7 @@ class WebViewController: UIViewController {
         webBook.translatesAutoresizingMaskIntoConstraints = false
         setupLayout()
         let req = NSURLRequest(URL: urlBook)
-        webBook.loadRequest(req)
-        
+        webBook.loadRequest(req)        
     }
 
     override func didReceiveMemoryWarning() {

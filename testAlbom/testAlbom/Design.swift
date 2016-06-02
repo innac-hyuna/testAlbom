@@ -33,20 +33,20 @@ extension UIColor {
             self.init(red: CGFloat(r) / CGFloat(255.0), green: CGFloat(g) / CGFloat(255.0), blue: CGFloat(b) / CGFloat(255.0), alpha: CGFloat(1))
         }
     }
-
+    static func bgFildColor() -> UIColor {
+        return UIColor(hexString: "#8f8f8d")
+    }
+    static func tabBarColor() -> UIColor {
+        return UIColor(hexString: "#34495e")
+    }
     
- static func bgFildColor() -> UIColor {
-    return UIColor(hexString: "#8f8f8d")
- }
+    static func borderFildColor() -> UIColor {
+        return UIColor(hexString: "#7a7a7a")
+    }
     
- static func borderFildColor() -> UIColor {
-    return UIColor(hexString: "#7a7a7a")
- }
-    
- static func textColor() -> UIColor {
-    return UIColor.whiteColor()
- }
-    
+    static func textColor() -> UIColor {
+        return UIColor.whiteColor()
+    }
 }
 
 extension UIFont {
@@ -81,7 +81,6 @@ extension UIView {
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 5
     }
-
 }
 
 

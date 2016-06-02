@@ -25,6 +25,8 @@ class CategoryViewController: UITabBarController {
     
     override func viewWillAppear(animated: Bool) {
         
+        self.tabBar.tintColor = UIColor.tabBarColor()
+        
         let MusicItem = MusicViewController()
         MusicIcon = UITabBarItem(title: "Musics", image: UIImage(named: "Musical0"), selectedImage: UIImage(named: "Musical1"))
         MusicItem.tabBarItem = MusicIcon

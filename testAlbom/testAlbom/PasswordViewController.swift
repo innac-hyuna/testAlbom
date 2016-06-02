@@ -184,7 +184,6 @@ class PasswordViewController: UIViewController {
             multiplier: 1.0,
             constant: 300 ))
         
-        
         compactConstraint.append(NSLayoutConstraint(
             item: iconImg,
             attribute: NSLayoutAttribute.TopMargin,
@@ -251,7 +250,6 @@ class PasswordViewController: UIViewController {
             attribute: NSLayoutAttribute.NotAnAttribute,
             multiplier: 1.0,
             constant: 250))
-
         
         compactConstraint.append(NSLayoutConstraint(
             item: passwordView,
