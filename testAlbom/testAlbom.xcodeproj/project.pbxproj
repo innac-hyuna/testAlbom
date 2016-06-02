@@ -30,7 +30,6 @@
 		DAD424221CFF058D00C9CEF6 /* Book6.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAD4241D1CFF058D00C9CEF6 /* Book6.pdf */; };
 		DAD424241CFF0BB400C9CEF6 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD424231CFF0BB400C9CEF6 /* VideoViewController.swift */; };
 		DAD424281CFF1CA800C9CEF6 /* Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DAD424271CFF1CA800C9CEF6 /* Video.mp4 */; };
-		DAD4242A1CFF1D6200C9CEF6 /* Music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAD424291CFF1D6200C9CEF6 /* Music.mp3 */; };
 		DAD4242C1CFF1D9400C9CEF6 /* Video1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = DAD4242B1CFF1D9400C9CEF6 /* Video1.m4v */; };
 		DAD4242F1CFF27DB00C9CEF6 /* Music1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAD4242D1CFF27DB00C9CEF6 /* Music1.mp3 */; };
 		DAD424301CFF27DB00C9CEF6 /* Music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAD4242E1CFF27DB00C9CEF6 /* Music2.mp3 */; };
@@ -85,7 +84,6 @@
 		DAD4241D1CFF058D00C9CEF6 /* Book6.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book6.pdf; path = testAlbom/Book6.pdf; sourceTree = "<group>"; };
 		DAD424231CFF0BB400C9CEF6 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		DAD424271CFF1CA800C9CEF6 /* Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Video.mp4; path = testAlbom/Video.mp4; sourceTree = "<group>"; };
-		DAD424291CFF1D6200C9CEF6 /* Music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Music.mp3; path = testAlbom/Music.mp3; sourceTree = "<group>"; };
 		DAD4242B1CFF1D9400C9CEF6 /* Video1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = Video1.m4v; path = testAlbom/Video1.m4v; sourceTree = "<group>"; };
 		DAD4242D1CFF27DB00C9CEF6 /* Music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Music1.mp3; path = testAlbom/Music1.mp3; sourceTree = "<group>"; };
 		DAD4242E1CFF27DB00C9CEF6 /* Music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Music2.mp3; path = testAlbom/Music2.mp3; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 				DAD4242D1CFF27DB00C9CEF6 /* Music1.mp3 */,
 				DAD4242E1CFF27DB00C9CEF6 /* Music2.mp3 */,
 				DAD4242B1CFF1D9400C9CEF6 /* Video1.m4v */,
-				DAD424291CFF1D6200C9CEF6 /* Music.mp3 */,
 				DAD424271CFF1CA800C9CEF6 /* Video.mp4 */,
 				DAD424191CFF058D00C9CEF6 /* Book2.pdf */,
 				DAD4241A1CFF058D00C9CEF6 /* Book3.pdf */,
@@ -322,7 +319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAD424221CFF058D00C9CEF6 /* Book6.pdf in Resources */,
-				DAD4242A1CFF1D6200C9CEF6 /* Music.mp3 in Resources */,
 				DAD069281CFDB44A00C7647D /* Podfile in Resources */,
 				DAD424211CFF058D00C9CEF6 /* Book5.pdf in Resources */,
 				DAD2B9521CFC8A0A001A17AD /* Assets.xcassets in Resources */,

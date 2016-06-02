@@ -13,7 +13,7 @@ class MusicViewController: UIViewController {
 
     var tableView: UITableView!
     var topBar: UILayoutSupport!
-    var arr = ["Music", "Music1", "Music2"]
+    var arr = ["Music1", "Music2"]
     var arrList = [(String, NSURL)]()
     var compactConstraint: [NSLayoutConstraint] = []
     var audioPlayer = AVAudioPlayer()
@@ -98,8 +98,7 @@ extension MusicViewController: UITableViewDataSource {
         } catch {
             let fetchError = error as NSError
             print(fetchError)
-        }
-        
+        }      
       
         dispatch_async(dispatch_get_main_queue(), {
             self.audioPlayer.prepareToPlay()
