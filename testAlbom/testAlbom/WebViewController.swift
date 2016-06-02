@@ -28,7 +28,6 @@ class WebViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
     func setupLayout() {
         compactConstraints.append(NSLayoutConstraint(item: webBook,

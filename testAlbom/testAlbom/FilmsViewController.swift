@@ -12,18 +12,15 @@ class FilmsViewController: UIViewController {
     
     var tableView: UITableView!
     var topBar: UILayoutSupport!
-    var arr = ["Video.mp4", "Video1.m4v"]
-    var arrList = [(String, NSURL)]()
+    var videoData: ManagerVideo!
     var compactConstraint: [NSLayoutConstraint] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for aBook in arr {
-            let fileName = aBook.substringToIndex(aBook.indexOf("."))
-            let fileFor = aBook.substringFromIndex(aBook.indexOf("."))
-            if let path = NSBundle.mainBundle().URLForResource(fileName, withExtension: fileFor , subdirectory: nil, localization: nil) {
-                arrList.append((aBook, path)) }}
+        videoData = ManagerVideo()
+        videoData.getDataArray()
+        
         topBar = self.topLayoutGuide
         tableView = UITableView()
         tableView.backgroundColor = UIColor(patternImage: UIImage.bgMainImage())
@@ -82,18 +79,18 @@ extension FilmsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SimpleTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SimpleTableViewCell
-        cell.titleLabel.text = arrList[indexPath.row].0
+        cell.titleLabel.text = videoData.arrList[indexPath.row].0
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let VideoController: VideoViewController = VideoViewController()
-        VideoController.urlVideo = arrList[indexPath.row].1
+        VideoController.urlVideo = videoData.arrList[indexPath.row].1
         navigationController?.pushViewController(VideoController, animated: true)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrList.count
+        return videoData.arrList.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

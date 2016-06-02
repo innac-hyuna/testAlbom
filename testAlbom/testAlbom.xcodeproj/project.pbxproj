@@ -13,6 +13,9 @@
 		DAA8E9E81CFDE25E005708C1 /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA8E9E71CFDE25E005708C1 /* SimpleTableViewCell.swift */; };
 		DAA8E9EA1CFDE66D005708C1 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA8E9E91CFDE66D005708C1 /* BookViewController.swift */; };
 		DAA8E9EC1CFDE680005708C1 /* FilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA8E9EB1CFDE680005708C1 /* FilmsViewController.swift */; };
+		DAA905CE1D007061003885F0 /* ManagerVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA905CD1D007061003885F0 /* ManagerVideo.swift */; };
+		DAA905D21D007F28003885F0 /* ManagerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA905D11D007F28003885F0 /* ManagerAudio.swift */; };
+		DAA905D41D00801D003885F0 /* ManagerBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA905D31D00801D003885F0 /* ManagerBook.swift */; };
 		DAD069241CFD832700C7647D /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD069231CFD832700C7647D /* Design.swift */; };
 		DAD069261CFD88B700C7647D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD069251CFD88B700C7647D /* Default-568h@2x.png */; };
 		DAD069281CFDB44A00C7647D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = DAD069271CFDB44A00C7647D /* Podfile */; };
@@ -61,6 +64,9 @@
 		DAA8E9E71CFDE25E005708C1 /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
 		DAA8E9E91CFDE66D005708C1 /* BookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		DAA8E9EB1CFDE680005708C1 /* FilmsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmsViewController.swift; sourceTree = "<group>"; };
+		DAA905CD1D007061003885F0 /* ManagerVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerVideo.swift; sourceTree = "<group>"; };
+		DAA905D11D007F28003885F0 /* ManagerAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerAudio.swift; sourceTree = "<group>"; };
+		DAA905D31D00801D003885F0 /* ManagerBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerBook.swift; sourceTree = "<group>"; };
 		DAD069231CFD832700C7647D /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		DAD069251CFD88B700C7647D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DAD069271CFDB44A00C7647D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -132,6 +138,47 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DAA905CF1D007E68003885F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAA905CD1D007061003885F0 /* ManagerVideo.swift */,
+				DAA905D11D007F28003885F0 /* ManagerAudio.swift */,
+				DAA905D31D00801D003885F0 /* ManagerBook.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		DAA905D01D007E9D003885F0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DAD2B94C1CFC8A0A001A17AD /* PasswordViewController.swift */,
+				DAA8E9E71CFDE25E005708C1 /* SimpleTableViewCell.swift */,
+				DAA8E9E31CFDD709005708C1 /* CategoryViewController.swift */,
+				DAA8E9E51CFDDAE9005708C1 /* MusicViewController.swift */,
+				DAA905D81D008057003885F0 /* Film */,
+				DAA905D51D00802E003885F0 /* Book */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		DAA905D51D00802E003885F0 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				DAA8E9E91CFDE66D005708C1 /* BookViewController.swift */,
+				DAD424171CFEE83600C9CEF6 /* WebViewController.swift */,
+			);
+			name = Book;
+			sourceTree = "<group>";
+		};
+		DAA905D81D008057003885F0 /* Film */ = {
+			isa = PBXGroup;
+			children = (
+				DAA8E9EB1CFDE680005708C1 /* FilmsViewController.swift */,
+				DAD424231CFF0BB400C9CEF6 /* VideoViewController.swift */,
+			);
+			name = Film;
+			sourceTree = "<group>";
+		};
 		DAD2B93E1CFC8A0A001A17AD = {
 			isa = PBXGroup;
 			children = (
@@ -162,14 +209,8 @@
 			children = (
 				DAD2B94A1CFC8A0A001A17AD /* AppDelegate.swift */,
 				DAD069231CFD832700C7647D /* Design.swift */,
-				DAD2B94C1CFC8A0A001A17AD /* PasswordViewController.swift */,
-				DAA8E9E31CFDD709005708C1 /* CategoryViewController.swift */,
-				DAA8E9E51CFDDAE9005708C1 /* MusicViewController.swift */,
-				DAA8E9E91CFDE66D005708C1 /* BookViewController.swift */,
-				DAA8E9EB1CFDE680005708C1 /* FilmsViewController.swift */,
-				DAA8E9E71CFDE25E005708C1 /* SimpleTableViewCell.swift */,
-				DAD424171CFEE83600C9CEF6 /* WebViewController.swift */,
-				DAD424231CFF0BB400C9CEF6 /* VideoViewController.swift */,
+				DAA905D01D007E9D003885F0 /* Controllers */,
+				DAA905CF1D007E68003885F0 /* Model */,
 				DAD2B9511CFC8A0A001A17AD /* Assets.xcassets */,
 				DAD2B9561CFC8A0A001A17AD /* Info.plist */,
 			);
@@ -411,7 +452,10 @@
 				DAA8E9E81CFDE25E005708C1 /* SimpleTableViewCell.swift in Sources */,
 				DAD2B94D1CFC8A0A001A17AD /* PasswordViewController.swift in Sources */,
 				DAA8E9EC1CFDE680005708C1 /* FilmsViewController.swift in Sources */,
+				DAA905D41D00801D003885F0 /* ManagerBook.swift in Sources */,
+				DAA905CE1D007061003885F0 /* ManagerVideo.swift in Sources */,
 				DAD424241CFF0BB400C9CEF6 /* VideoViewController.swift in Sources */,
+				DAA905D21D007F28003885F0 /* ManagerAudio.swift in Sources */,
 				DAD2B94B1CFC8A0A001A17AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

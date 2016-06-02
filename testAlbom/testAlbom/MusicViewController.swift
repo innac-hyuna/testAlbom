@@ -13,10 +13,8 @@ class MusicViewController: UIViewController {
 
     var tableView: UITableView!
     var topBar: UILayoutSupport!
-    var arr = ["Music1", "Music2"]
-    var arrList = [(String, NSURL)]()
+    var audioData: ManagerAudio!
     var compactConstraint: [NSLayoutConstraint] = []
-    var audioPlayer = AVAudioPlayer()
     var buttonPlay: UIButton!
     var buttonPause: UIButton!
     var butttonStop: UIButton!
@@ -25,6 +23,9 @@ class MusicViewController: UIViewController {
         super.viewDidLoad()
         
         topBar = self.topLayoutGuide
+        
+        audioData = ManagerAudio()
+        audioData.getDataArray()
         
         buttonPlay = UIButton(type: .Custom) as UIButton
         buttonPlay.setImage(UIImage(named: "Play-44"), forState: .Normal)
@@ -50,10 +51,6 @@ class MusicViewController: UIViewController {
         butttonStop.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(butttonStop)
         
-        for aBook in arr {
-            if let path = NSBundle.mainBundle().URLForResource(aBook, withExtension: "mp3", subdirectory: nil, localization: nil) {
-                arrList.append((aBook, path)) }}
-
         tableView = UITableView()
         tableView.backgroundColor = UIColor(patternImage: UIImage.bgMainImage())
         tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -61,8 +58,7 @@ class MusicViewController: UIViewController {
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        setLayout()
-    
+        setLayout()    
        
     }
 
@@ -173,28 +169,21 @@ class MusicViewController: UIViewController {
         butttonStop.enabled = true
         buttonPause.enabled = true
         buttonPlay.enabled = false
-        dispatch_async(dispatch_get_main_queue(), {
-            self.audioPlayer.prepareToPlay()
-            self.audioPlayer.play()
-            print("play")})
+        audioData.play()
         }
     
     func stop(sender: UIButton) {
         butttonStop.enabled = false
         buttonPause.enabled = false
         buttonPlay.enabled = true
-        audioPlayer.stop()
-        print(audioPlayer.currentTime)
-        audioPlayer.currentTime = 0
-        print("stop")
+        audioData.stop()
     }
     
     func pause(sender: UIButton) {
         butttonStop.enabled = true
         buttonPause.enabled = false
         buttonPlay.enabled = true
-        audioPlayer.pause()
-        print("pause")
+        audioData.pause()
     }   
  
 }
@@ -209,26 +198,19 @@ extension MusicViewController: UITableViewDataSource {
     
    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SimpleTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SimpleTableViewCell
-        cell.titleLabel.text = arrList[indexPath.row].0
+        cell.titleLabel.text = audioData.arrList[indexPath.row].0
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
         buttonPlay.enabled = true
-        
-         do {
-            try audioPlayer = AVAudioPlayer(contentsOfURL: arrList[indexPath.row].1)
-        } catch {
-            let fetchError = error as NSError
-            print(fetchError)
-        }
-            audioPlayer.delegate = self
+        audioData.setPlayer(self, url: audioData.arrList[indexPath.row].1)
     }
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return arrList.count
+       return audioData.arrList.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -254,8 +236,7 @@ extension MusicViewController: AVAudioPlayerDelegate {
     func audioPlayerBeginInterruption(player: AVAudioPlayer) {
     }
     
-    func audioPlayerEndInterruption(player: AVAudioPlayer) {
-        
+    func audioPlayerEndInterruption(player: AVAudioPlayer) {        
        
     }
 }

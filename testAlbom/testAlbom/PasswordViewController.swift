@@ -63,6 +63,7 @@ class PasswordViewController: UIViewController {
         loginText.textColor = UIColor.textColor()
         loginText.delegate = self
         loginText.tag = 0
+        loginText.autocapitalizationType = UITextAutocapitalizationType.None
         loginText.translatesAutoresizingMaskIntoConstraints = false
         loginView.addSubview(loginText)
         
@@ -111,7 +112,7 @@ class PasswordViewController: UIViewController {
                                              message: "Wrong username or password." as String, preferredStyle:.Alert)
           let okAction = UIAlertAction(title: "Foiled Again!", style: .Default, handler: nil)
           alertView.addAction(okAction)
-          self.presentViewController(alertView, animated: true, completion: nil)
+          presentViewController(alertView, animated: true, completion: nil)
           return
         }
         
@@ -120,14 +121,14 @@ class PasswordViewController: UIViewController {
             if checkLoginPassword(loginText.text!, password: passwordText.text!)
             {
                 let NavController = UINavigationController(rootViewController: CategoryViewController())
-                self.presentViewController(NavController, animated: true, completion: nil)
+                presentViewController(NavController, animated: true, completion: nil)
                 
             } else {
                 let alertView = UIAlertController(title: "Login Problem",
                                                   message: "Wrong username or password." as String, preferredStyle:.Alert)
                 let okAction = UIAlertAction(title: "Foiled Again!", style: .Default, handler: nil)
                 alertView.addAction(okAction)
-                self.presentViewController(alertView, animated: true, completion: nil)
+                presentViewController(alertView, animated: true, completion: nil)
             }
         } else {
             // Save login password
@@ -139,10 +140,8 @@ class PasswordViewController: UIViewController {
             } else {
                 print("not save ")}
         }
-        
        loginText.text = ""
        passwordText.text = ""
-
     }
     
     func checkLoginPassword(login: String, password: String) -> Bool {
@@ -306,7 +305,6 @@ class PasswordViewController: UIViewController {
             multiplier: 1.0,
             constant: 0))
           NSLayoutConstraint.activateConstraints(compactConstraint)
-
     }
     
     func setapLayoutText(dImg: UIImageView, dText: UITextField, dView: UIView) {
