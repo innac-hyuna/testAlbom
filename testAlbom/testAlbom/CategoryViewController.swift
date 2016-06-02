@@ -13,11 +13,12 @@ class CategoryViewController: UITabBarController {
     var MusicIcon: UITabBarItem!
     var BookIcon: UITabBarItem!
     var FilmsIcon: UITabBarItem!
-
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-    }
+        title = "Category"
+       }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

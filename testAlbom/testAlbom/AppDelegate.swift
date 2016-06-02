@@ -12,13 +12,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var navController: UINavigationController?
-
-
+ 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        navController = UINavigationController(rootViewController: PasswordViewController())
+        
+        let mainController = PasswordViewController()       
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = navController
+        window?.rootViewController = mainController
         window?.backgroundColor = UIColor(patternImage: UIImage.bgMainImage())
         window?.makeKeyAndVisible()
       
@@ -46,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
     
     }
-
 
 }
 

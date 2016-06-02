@@ -27,8 +27,8 @@ class PasswordViewController: UIViewController {
     var keychain: KeychainSwift!
 
     override func viewDidLoad() {
-        super.viewDidLoad()       
-      
+        super.viewDidLoad()        
+        
         keychain = KeychainSwift()
         
         topBar = self.topLayoutGuide
@@ -62,6 +62,7 @@ class PasswordViewController: UIViewController {
         loginText = UITextField()
         loginText.textColor = UIColor.textColor()
         loginText.delegate = self
+        loginText.tag = 0
         loginText.translatesAutoresizingMaskIntoConstraints = false
         loginView.addSubview(loginText)
         
@@ -78,6 +79,7 @@ class PasswordViewController: UIViewController {
         passwordText = UITextField()
         passwordText.secureTextEntry = true
         passwordText.delegate = self
+        passwordText.tag = 1
         passwordText.textColor = UIColor.textColor()
         passwordText.translatesAutoresizingMaskIntoConstraints = false
         passwordView.addSubview(passwordText)
@@ -88,8 +90,8 @@ class PasswordViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(PasswordViewController.loginButtonAction(_:)), forControlEvents: .TouchUpInside)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginButton)
-        
         setapLayout()
+      
         
     }
 
@@ -98,7 +100,11 @@ class PasswordViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func loginButtonAction (sender: UIButton) {
+ func loginButtonAction (sender: UIButton) {
+    forLoginButtonAction()
+    }
+    
+ func forLoginButtonAction () {
         
         if loginText.text == "" || passwordText.text == ""
         { let alertView = UIAlertController(title: "Login Problem",
@@ -112,8 +118,10 @@ class PasswordViewController: UIViewController {
         if NSUserDefaults.standardUserDefaults().valueForKey("loginkey") != nil  {
             //check login pasword
             if checkLoginPassword(loginText.text!, password: passwordText.text!)
-            {   let CategoryController: CategoryViewController = CategoryViewController()
-                navigationController?.pushViewController(CategoryController, animated: true)
+            {
+                let NavController = UINavigationController(rootViewController: CategoryViewController())
+                self.presentViewController(NavController, animated: true, completion: nil)
+                
             } else {
                 let alertView = UIAlertController(title: "Login Problem",
                                                   message: "Wrong username or password." as String, preferredStyle:.Alert)
@@ -147,13 +155,7 @@ class PasswordViewController: UIViewController {
                 return false }
         } else
         { return false }
-    }
-    
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        NSLayoutConstraint.activateConstraints(compactConstraint)
-        
-    }
+    }    
     
     func setapLayout() {
         
@@ -303,6 +305,7 @@ class PasswordViewController: UIViewController {
             attribute: NSLayoutAttribute.CenterX,
             multiplier: 1.0,
             constant: 0))
+          NSLayoutConstraint.activateConstraints(compactConstraint)
 
     }
     
@@ -360,7 +363,11 @@ extension PasswordViewController: UITextFieldDelegate {
         {return false}
     }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-     self.view.endEditing(true)
+        if textField.tag == 1 {
+             forLoginButtonAction()
+        } else {
+          self.view.endEditing(true)
+        }
       return true
     }
 

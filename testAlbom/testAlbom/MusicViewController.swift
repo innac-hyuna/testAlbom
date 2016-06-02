@@ -20,11 +20,9 @@ class MusicViewController: UIViewController {
     var buttonPlay: UIButton!
     var buttonPause: UIButton!
     var butttonStop: UIButton!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         topBar = self.topLayoutGuide
         
@@ -35,7 +33,6 @@ class MusicViewController: UIViewController {
         buttonPlay.enabled = false
         buttonPlay.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonPlay)
-    
     
         buttonPause = UIButton(type: .Custom) as UIButton
         buttonPause.setImage(UIImage(named: "Pause-44"), forState: .Normal)
@@ -52,7 +49,6 @@ class MusicViewController: UIViewController {
         butttonStop.enabled = false
         butttonStop.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(butttonStop)
-
         
         for aBook in arr {
             if let path = NSBundle.mainBundle().URLForResource(aBook, withExtension: "mp3", subdirectory: nil, localization: nil) {
@@ -66,6 +62,7 @@ class MusicViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         setLayout()
+    
        
     }
 
@@ -74,11 +71,6 @@ class MusicViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        NSLayoutConstraint.activateConstraints(compactConstraint)
-        
-    }
     
     func setLayout() {
         
@@ -97,7 +89,7 @@ class MusicViewController: UIViewController {
             toItem: view,
             attribute: NSLayoutAttribute.Leading,
             multiplier: 1.0,
-            constant: 10))
+            constant: 0))
         
         compactConstraint.append(NSLayoutConstraint(
             item: buttonPause,
@@ -173,6 +165,8 @@ class MusicViewController: UIViewController {
             attribute: NSLayoutAttribute.Width,
             multiplier: 1.0,
             constant: 0))
+        
+         NSLayoutConstraint.activateConstraints(compactConstraint)
     }
     
     func play(sender: UIButton) {
@@ -184,7 +178,6 @@ class MusicViewController: UIViewController {
             self.audioPlayer.play()
             print("play")})
         }
-
     
     func stop(sender: UIButton) {
         butttonStop.enabled = false
@@ -196,15 +189,13 @@ class MusicViewController: UIViewController {
         print("stop")
     }
     
-    
     func pause(sender: UIButton) {
         butttonStop.enabled = true
         buttonPause.enabled = false
         buttonPlay.enabled = true
         audioPlayer.pause()
         print("pause")
-    }
-    
+    }   
  
 }
 

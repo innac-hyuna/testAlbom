@@ -37,10 +37,6 @@ class VideoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        NSLayoutConstraint.activateConstraints(compactConstraints)
-    }
     
     func setupLayout() {
         compactConstraints.append(NSLayoutConstraint(item: playerController.view,
@@ -64,5 +60,7 @@ class VideoViewController: UIViewController {
             attribute: NSLayoutAttribute.Width,
             multiplier: 1.0,
             constant: 0))
+        
+      NSLayoutConstraint.activateConstraints(compactConstraints)
     }
 }

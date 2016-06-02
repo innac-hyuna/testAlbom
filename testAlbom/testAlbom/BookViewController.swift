@@ -38,12 +38,6 @@ class BookViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        NSLayoutConstraint.activateConstraints(compactConstraint)
-        
-    }
-    
     func setLayout() {
         
         compactConstraint.append(NSLayoutConstraint(
@@ -70,7 +64,9 @@ class BookViewController: UIViewController {
             attribute: NSLayoutAttribute.Width,
             multiplier: 1.0,
             constant: 0))
+         NSLayoutConstraint.activateConstraints(compactConstraint)
     }
+    
     
 }
 
