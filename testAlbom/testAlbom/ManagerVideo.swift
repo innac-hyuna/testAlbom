@@ -19,7 +19,7 @@ class ManagerVideo {
     var playerController: AVPlayerViewController!
     var player: AVPlayer!
     
-    func getDataArray() {
+    init() {
         for aBook in arr {
             let fileName = aBook.substringToIndex(aBook.indexOf("."))
             let fileFor = aBook.substringFromIndex(aBook.indexOf("."))
@@ -34,7 +34,6 @@ class ManagerVideo {
     }
     func play() {
         player.play()
-    }
-    
+    }   
 
 }

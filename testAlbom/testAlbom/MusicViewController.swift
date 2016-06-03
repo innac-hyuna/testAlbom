@@ -18,6 +18,8 @@ class MusicViewController: UIViewController {
     var buttonPlay: UIButton!
     var buttonPause: UIButton!
     var butttonStop: UIButton!
+    var volumeSlider: UISlider!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +27,12 @@ class MusicViewController: UIViewController {
         topBar = self.topLayoutGuide
         
         audioData = ManagerAudio()
-        audioData.getDataArray()
-        
+        volumeSlider = UISlider()
+        volumeSlider.enabled = false
+        volumeSlider.addTarget(self, action: #selector(MusicViewController.slidermov(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        volumeSlider.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(volumeSlider)
+               
         buttonPlay = UIButton(type: .Custom) as UIButton
         buttonPlay.setImage(UIImage(named: "Play-44"), forState: .Normal)
         buttonPlay.frame = CGRectMake(0, 0, 44, 44)
@@ -53,12 +59,15 @@ class MusicViewController: UIViewController {
         
         tableView = UITableView()
         tableView.backgroundColor = UIColor(patternImage: UIImage.bgMainImage())
+        tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1))
         tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        setLayout()    
+        setLayout()
+        
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MusicViewController.setSelectRow(_:)), name:"PlayerCange", object: nil)
        
     }
 
@@ -67,87 +76,123 @@ class MusicViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func slidermov(sender: UISlider) {
+        if   audioData.audioPlayer != nil {
+            audioData.audioPlayer.volume = volumeSlider.value
+            print(audioData.audioPlayer.volume)}
+      
+    }
+    
+    func setSelectRow(notif: NSNotification) {//
+        guard let row = notif.object as? Int else { return }
+            tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle )
+    }
     
     func setLayout() {
         
         compactConstraint.append(NSLayoutConstraint(
             item: buttonPlay,
-            attribute: NSLayoutAttribute.TopMargin,
+            attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
             toItem: topBar,
-            attribute: NSLayoutAttribute.BottomMargin,
+            attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
             constant: 20))
         compactConstraint.append(NSLayoutConstraint(
-            item: tableView,
+            item: buttonPlay,
             attribute: NSLayoutAttribute.Leading,
             relatedBy: NSLayoutRelation.Equal,
             toItem: view,
-            attribute: NSLayoutAttribute.Leading,
+            attribute: NSLayoutAttribute.LeadingMargin,
             multiplier: 1.0,
             constant: 0))
         
         compactConstraint.append(NSLayoutConstraint(
             item: buttonPause,
-            attribute: NSLayoutAttribute.TopMargin,
+            attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
             toItem: topBar,
-            attribute: NSLayoutAttribute.BottomMargin,
+            attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
             constant: 20))
         compactConstraint.append(NSLayoutConstraint(
             item: buttonPause,
-            attribute: NSLayoutAttribute.CenterX,
+            attribute: NSLayoutAttribute.Leading,
             relatedBy: NSLayoutRelation.Equal,
-            toItem: view,
-            attribute: NSLayoutAttribute.CenterX,
-            multiplier: 1.0,
-            constant: 0))
-        
-        compactConstraint.append(NSLayoutConstraint(
-            item: butttonStop,
-            attribute: NSLayoutAttribute.TopMargin,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: topBar,
-            attribute: NSLayoutAttribute.BottomMargin,
-            multiplier: 1.0,
-            constant: 20))
-        compactConstraint.append(NSLayoutConstraint(
-            item: butttonStop,
-            attribute: NSLayoutAttribute.TrailingMargin,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: view,
-            attribute: NSLayoutAttribute.TrailingMargin,
+            toItem: buttonPlay,
+            attribute: NSLayoutAttribute.Trailing,
             multiplier: 1.0,
             constant: 10))
         
         compactConstraint.append(NSLayoutConstraint(
-            item: tableView,
-            attribute: NSLayoutAttribute.TopMargin,
+            item: butttonStop,
+            attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
-            toItem: buttonPlay,
-            attribute: NSLayoutAttribute.BottomMargin,
+            toItem: topBar,
+            attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 15))
+            constant: 20))
         compactConstraint.append(NSLayoutConstraint(
-            item: tableView,
-            attribute: NSLayoutAttribute.TopMargin,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: butttonStop,
-            attribute: NSLayoutAttribute.BottomMargin,
-            multiplier: 1.0,
-            constant: 15))
-        compactConstraint.append(NSLayoutConstraint(
-            item: tableView,
-            attribute: NSLayoutAttribute.TopMargin,
+            item: butttonStop,
+            attribute: NSLayoutAttribute.Leading,
             relatedBy: NSLayoutRelation.Equal,
             toItem: buttonPause,
-            attribute: NSLayoutAttribute.BottomMargin,
+            attribute: NSLayoutAttribute.Trailing,
+            multiplier: 1.0,
+            constant: 10))
+        
+        compactConstraint.append(NSLayoutConstraint(
+            item: volumeSlider,
+            attribute: NSLayoutAttribute.Top,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: topBar,
+            attribute: NSLayoutAttribute.Bottom,
+            multiplier: 1.0,
+            constant: 25))
+        compactConstraint.append(NSLayoutConstraint(
+            item: volumeSlider,
+            attribute: NSLayoutAttribute.Leading,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: butttonStop,
+            attribute: NSLayoutAttribute.Trailing,
+            multiplier: 1.0,
+            constant: 0))
+        compactConstraint.append(NSLayoutConstraint(
+            item: volumeSlider,
+            attribute: NSLayoutAttribute.TrailingMargin,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: view,
+            attribute: NSLayoutAttribute.Trailing,
+            multiplier: 1.0,
+            constant: -25))
+        
+        compactConstraint.append(NSLayoutConstraint(
+            item: tableView,
+            attribute: NSLayoutAttribute.Top,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: buttonPlay,
+            attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
             constant: 15))
         compactConstraint.append(NSLayoutConstraint(
             item: tableView,
-            attribute: NSLayoutAttribute.BottomMargin,
+            attribute: NSLayoutAttribute.Top,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: butttonStop,
+            attribute: NSLayoutAttribute.Bottom,
+            multiplier: 1.0,
+            constant: 15))
+        compactConstraint.append(NSLayoutConstraint(
+            item: tableView,
+            attribute: NSLayoutAttribute.Top,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: buttonPause,
+            attribute: NSLayoutAttribute.Bottom,
+            multiplier: 1.0,
+            constant: 15))
+        compactConstraint.append(NSLayoutConstraint(
+            item: tableView,
+            attribute: NSLayoutAttribute.Bottom,
             relatedBy: NSLayoutRelation.Equal,
             toItem: view,
             attribute: NSLayoutAttribute.BottomMargin,
@@ -166,6 +211,7 @@ class MusicViewController: UIViewController {
     }
     
     func play(sender: UIButton) {
+        volumeSlider.enabled = true
         butttonStop.enabled = true
         buttonPause.enabled = true
         buttonPlay.enabled = false
@@ -173,6 +219,7 @@ class MusicViewController: UIViewController {
         }
     
     func stop(sender: UIButton) {
+        volumeSlider.enabled = false
         butttonStop.enabled = false
         buttonPause.enabled = false
         buttonPlay.enabled = true
@@ -180,12 +227,12 @@ class MusicViewController: UIViewController {
     }
     
     func pause(sender: UIButton) {
+        volumeSlider.enabled = true
         butttonStop.enabled = true
         buttonPause.enabled = false
         buttonPlay.enabled = true
         audioData.pause()
-    }   
- 
+    }
 }
 
 extension MusicViewController: UITableViewDelegate {
@@ -205,7 +252,7 @@ extension MusicViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
         buttonPlay.enabled = true
-        audioData.setPlayer(self, url: audioData.arrList[indexPath.row].1)
+        audioData.setPlayer(audioData.arrList[indexPath.row].1)
     }
 
     
@@ -219,24 +266,3 @@ extension MusicViewController: UITableViewDataSource {
     
 }
 
-extension MusicViewController: AVAudioPlayerDelegate {
-    
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully
-        flag: Bool) {
-        
-        buttonPlay.enabled = true
-        buttonPause.enabled = false
-        butttonStop.enabled = false
-    }
-    
-    func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer,
-                                        error: NSError?) {
-    }
-    
-    func audioPlayerBeginInterruption(player: AVAudioPlayer) {
-    }
-    
-    func audioPlayerEndInterruption(player: AVAudioPlayer) {        
-       
-    }
-}

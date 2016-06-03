@@ -19,8 +19,7 @@ class FilmsViewController: UIViewController {
         super.viewDidLoad()
         
         videoData = ManagerVideo()
-        videoData.getDataArray()
-        
+              
         topBar = self.topLayoutGuide
         tableView = UITableView()
         tableView.backgroundColor = UIColor(patternImage: UIImage.bgMainImage())
