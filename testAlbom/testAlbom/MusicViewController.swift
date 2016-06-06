@@ -19,24 +19,40 @@ class MusicViewController: UIViewController {
     var buttonPause: UIButton!
     var butttonStop: UIButton!
     var volumeSlider: UISlider!
+    var timeSlider: UISlider!
+    var timeLabel: UILabel!
+    var audioTimer: NSTimer!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         topBar = self.topLayoutGuide
-        
-        audioData = ManagerAudio()
+
         volumeSlider = UISlider()
         volumeSlider.enabled = false
-        volumeSlider.addTarget(self, action: #selector(MusicViewController.slidermov(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        volumeSlider.value = 0.3
+        volumeSlider.addTarget(self, action: #selector(MusicViewController.sliderMov(_:)), forControlEvents: UIControlEvents.ValueChanged)
         volumeSlider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(volumeSlider)
-               
+     
+        timeLabel = UILabel()
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(timeLabel)
+        
+        timeSlider = UISlider()
+        timeSlider.minimumValue = 0
+        timeSlider.maximumTrackTintColor = UIColor.borderFildColor()
+        timeSlider.setThumbImage(UIImage(named:"Stop-44"), forState: UIControlState.Normal)
+        timeSlider.enabled = false
+        timeSlider.addTarget(self, action: #selector(MusicViewController.timeMov(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        timeSlider.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(timeSlider)
+        
         buttonPlay = UIButton(type: .Custom) as UIButton
         buttonPlay.setImage(UIImage(named: "Play-44"), forState: .Normal)
         buttonPlay.frame = CGRectMake(0, 0, 44, 44)
-        buttonPlay.addTarget(self, action: #selector(MusicViewController.play(_:)), forControlEvents: .TouchUpInside)
+        buttonPlay.addTarget(self, action: #selector(MusicViewController.playAction(_:)), forControlEvents: .TouchUpInside)
         buttonPlay.enabled = false
         buttonPlay.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonPlay)
@@ -44,7 +60,7 @@ class MusicViewController: UIViewController {
         buttonPause = UIButton(type: .Custom) as UIButton
         buttonPause.setImage(UIImage(named: "Pause-44"), forState: .Normal)
         buttonPause.frame = CGRectMake(0, 0, 44, 44)
-        buttonPause.addTarget(self, action: #selector(MusicViewController.pause(_:)), forControlEvents: .TouchUpInside)
+        buttonPause.addTarget(self, action: #selector(MusicViewController.pauseAction(_:)), forControlEvents: .TouchUpInside)
         buttonPause.enabled = false
         buttonPause.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonPause)
@@ -52,7 +68,7 @@ class MusicViewController: UIViewController {
         butttonStop = UIButton(type: .Custom) as UIButton
         butttonStop.setImage(UIImage(named: "Stop-44"), forState: .Normal)
         butttonStop.frame = CGRectMake(0, 0, 44, 44)
-        butttonStop.addTarget(self, action: #selector(MusicViewController.stop(_:)), forControlEvents: .TouchUpInside)
+        butttonStop.addTarget(self, action: #selector(MusicViewController.stopAction(_:)), forControlEvents: .TouchUpInside)
         butttonStop.enabled = false
         butttonStop.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(butttonStop)
@@ -65,10 +81,14 @@ class MusicViewController: UIViewController {
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        
         setLayout()
         
-         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MusicViewController.setSelectRow(_:)), name:"PlayerCange", object: nil)
-       
+        audioData = ManagerAudio()
+        audioData.volume = volumeSlider.value
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MusicViewController.setSelectRow(_:)), name:"PlayerCange", object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,16 +96,33 @@ class MusicViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func slidermov(sender: UISlider) {
-        if   audioData.audioPlayer != nil {
-            audioData.audioPlayer.volume = volumeSlider.value
-            print(audioData.audioPlayer.volume)}
-      
+    func timeLeft() {
+        timeLabel.text =  audioData.timeLeft()
+        timeSlider.value = Float(audioData.audioPlayer.currentTime)
+     }
+ 
+    func sliderMov(sender: UISlider) {
+        audioData.setVolum(volumeSlider.value)
     }
     
-    func setSelectRow(notif: NSNotification) {//
+    func timeMov(sender: UISlider) {
+        stop()
+        audioData.setTime(timeSlider.value)
+        print(timeSlider.value)
+        play()
+        
+    }
+    
+    func setSelectRow(notif: NSNotification) {
         guard let row = notif.object as? Int else { return }
             tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle )
+        setTimerSetings()
+    }
+    
+    func setTimerSetings()  {
+       timeSlider.value = 0
+       timeLabel.text =  audioData.getDurationString()
+       timeSlider.maximumValue = audioData.getDurationFloat()
     }
     
     func setLayout() {
@@ -167,26 +204,53 @@ class MusicViewController: UIViewController {
             constant: -25))
         
         compactConstraint.append(NSLayoutConstraint(
-            item: tableView,
+            item: timeSlider,
             attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
             toItem: buttonPlay,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 15))
+            constant: 25))
         compactConstraint.append(NSLayoutConstraint(
-            item: tableView,
+            item: timeSlider,
+            attribute: NSLayoutAttribute.Leading,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: view,
+            attribute: NSLayoutAttribute.Leading,
+            multiplier: 1.0,
+            constant: 25))
+        
+        compactConstraint.append(NSLayoutConstraint(
+            item: timeLabel,
             attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
-            toItem: butttonStop,
+            toItem: volumeSlider,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 15))
+            constant: 45))
+        compactConstraint.append(NSLayoutConstraint(
+            item: timeLabel,
+            attribute: NSLayoutAttribute.Leading,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: timeSlider,
+            attribute: NSLayoutAttribute.Trailing,
+            multiplier: 1.0,
+            constant: 5))
+        compactConstraint.append(NSLayoutConstraint(
+            item: timeLabel,
+            attribute: NSLayoutAttribute.Trailing,
+            relatedBy: NSLayoutRelation.Equal,
+            toItem: view,
+            attribute: NSLayoutAttribute.TrailingMargin,
+            multiplier: 1.0,
+            constant: -5))
+
+        
         compactConstraint.append(NSLayoutConstraint(
             item: tableView,
             attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
-            toItem: buttonPause,
+            toItem: timeSlider,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
             constant: 15))
@@ -210,27 +274,48 @@ class MusicViewController: UIViewController {
          NSLayoutConstraint.activateConstraints(compactConstraint)
     }
     
-    func play(sender: UIButton) {
+    func playAction(sender: UIButton) {
+      
         volumeSlider.enabled = true
+        timeSlider.enabled = true
         butttonStop.enabled = true
         buttonPause.enabled = true
         buttonPlay.enabled = false
-        audioData.play()
+        play()
+       
         }
+    func play() {
+        audioData.play()
+        audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(MusicViewController.timeLeft), userInfo: nil, repeats: true)
+        
+    }
     
-    func stop(sender: UIButton) {
+    func stopAction(sender: UIButton) {
+        setTimerSetings()
         volumeSlider.enabled = false
+        timeSlider.enabled = false
         butttonStop.enabled = false
         buttonPause.enabled = false
         buttonPlay.enabled = true
+        stop()
+    }
+    
+    func stop() {
+        audioTimer.invalidate()
         audioData.stop()
     }
     
-    func pause(sender: UIButton) {
+    func pauseAction(sender: UIButton) {
         volumeSlider.enabled = true
+        timeSlider.enabled = true
         butttonStop.enabled = true
         buttonPause.enabled = false
         buttonPlay.enabled = true
+        pause()
+    }
+    
+    func pause() {
+        audioTimer.invalidate()
         audioData.pause()
     }
 }
@@ -253,6 +338,9 @@ extension MusicViewController: UITableViewDataSource {
        
         buttonPlay.enabled = true
         audioData.setPlayer(audioData.arrList[indexPath.row].1)
+        setTimerSetings()
+        audioData.setVolum(volumeSlider.value)
+        
     }
 
     

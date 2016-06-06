@@ -11,7 +11,7 @@ import UIKit
 class ManagerBook {
     
   var url: NSURL = NSURL()
-  var arr = ["Book", "Book1", "Book2", "Book3", "Book4", "Book5", "Book6"]
+  var arr = ["Book", "Book1", "Book2", "Book3"]
   var arrList = [(String, NSURL)]()
     
   init() {

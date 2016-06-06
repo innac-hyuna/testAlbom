@@ -16,6 +16,10 @@
 		DAA905CE1D007061003885F0 /* ManagerVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA905CD1D007061003885F0 /* ManagerVideo.swift */; };
 		DAA905D21D007F28003885F0 /* ManagerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA905D11D007F28003885F0 /* ManagerAudio.swift */; };
 		DAA905D41D00801D003885F0 /* ManagerBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA905D31D00801D003885F0 /* ManagerBook.swift */; };
+		DAB748AA1D05687800E4BBC0 /* music1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAB748A61D05687800E4BBC0 /* music1.mp3 */; };
+		DAB748AB1D05687800E4BBC0 /* music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAB748A71D05687800E4BBC0 /* music2.mp3 */; };
+		DAB748AC1D05687800E4BBC0 /* music3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAB748A81D05687800E4BBC0 /* music3.mp3 */; };
+		DAB748AD1D05687800E4BBC0 /* music4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAB748A91D05687800E4BBC0 /* music4.mp3 */; };
 		DAD069241CFD832700C7647D /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD069231CFD832700C7647D /* Design.swift */; };
 		DAD069261CFD88B700C7647D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD069251CFD88B700C7647D /* Default-568h@2x.png */; };
 		DAD069281CFDB44A00C7647D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = DAD069271CFDB44A00C7647D /* Podfile */; };
@@ -28,14 +32,9 @@
 		DAD424181CFEE83600C9CEF6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD424171CFEE83600C9CEF6 /* WebViewController.swift */; };
 		DAD4241E1CFF058D00C9CEF6 /* Book2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAD424191CFF058D00C9CEF6 /* Book2.pdf */; };
 		DAD4241F1CFF058D00C9CEF6 /* Book3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAD4241A1CFF058D00C9CEF6 /* Book3.pdf */; };
-		DAD424201CFF058D00C9CEF6 /* Book4.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAD4241B1CFF058D00C9CEF6 /* Book4.pdf */; };
-		DAD424211CFF058D00C9CEF6 /* Book5.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAD4241C1CFF058D00C9CEF6 /* Book5.pdf */; };
-		DAD424221CFF058D00C9CEF6 /* Book6.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAD4241D1CFF058D00C9CEF6 /* Book6.pdf */; };
 		DAD424241CFF0BB400C9CEF6 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD424231CFF0BB400C9CEF6 /* VideoViewController.swift */; };
 		DAD424281CFF1CA800C9CEF6 /* Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DAD424271CFF1CA800C9CEF6 /* Video.mp4 */; };
 		DAD4242C1CFF1D9400C9CEF6 /* Video1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = DAD4242B1CFF1D9400C9CEF6 /* Video1.m4v */; };
-		DAD4242F1CFF27DB00C9CEF6 /* Music1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAD4242D1CFF27DB00C9CEF6 /* Music1.mp3 */; };
-		DAD424301CFF27DB00C9CEF6 /* Music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAD4242E1CFF27DB00C9CEF6 /* Music2.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +66,10 @@
 		DAA905CD1D007061003885F0 /* ManagerVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerVideo.swift; sourceTree = "<group>"; };
 		DAA905D11D007F28003885F0 /* ManagerAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerAudio.swift; sourceTree = "<group>"; };
 		DAA905D31D00801D003885F0 /* ManagerBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerBook.swift; sourceTree = "<group>"; };
+		DAB748A61D05687800E4BBC0 /* music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = music1.mp3; path = testAlbom/music1.mp3; sourceTree = "<group>"; };
+		DAB748A71D05687800E4BBC0 /* music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = music2.mp3; path = testAlbom/music2.mp3; sourceTree = "<group>"; };
+		DAB748A81D05687800E4BBC0 /* music3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = music3.mp3; path = testAlbom/music3.mp3; sourceTree = "<group>"; };
+		DAB748A91D05687800E4BBC0 /* music4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = music4.mp3; path = testAlbom/music4.mp3; sourceTree = "<group>"; };
 		DAD069231CFD832700C7647D /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		DAD069251CFD88B700C7647D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DAD069271CFDB44A00C7647D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -85,14 +88,9 @@
 		DAD424171CFEE83600C9CEF6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DAD424191CFF058D00C9CEF6 /* Book2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book2.pdf; path = testAlbom/Book2.pdf; sourceTree = "<group>"; };
 		DAD4241A1CFF058D00C9CEF6 /* Book3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book3.pdf; path = testAlbom/Book3.pdf; sourceTree = "<group>"; };
-		DAD4241B1CFF058D00C9CEF6 /* Book4.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book4.pdf; path = testAlbom/Book4.pdf; sourceTree = "<group>"; };
-		DAD4241C1CFF058D00C9CEF6 /* Book5.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book5.pdf; path = testAlbom/Book5.pdf; sourceTree = "<group>"; };
-		DAD4241D1CFF058D00C9CEF6 /* Book6.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book6.pdf; path = testAlbom/Book6.pdf; sourceTree = "<group>"; };
 		DAD424231CFF0BB400C9CEF6 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		DAD424271CFF1CA800C9CEF6 /* Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Video.mp4; path = testAlbom/Video.mp4; sourceTree = "<group>"; };
 		DAD4242B1CFF1D9400C9CEF6 /* Video1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = Video1.m4v; path = testAlbom/Video1.m4v; sourceTree = "<group>"; };
-		DAD4242D1CFF27DB00C9CEF6 /* Music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Music1.mp3; path = testAlbom/Music1.mp3; sourceTree = "<group>"; };
-		DAD4242E1CFF27DB00C9CEF6 /* Music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Music2.mp3; path = testAlbom/Music2.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,15 +236,14 @@
 		DAD424141CFED63A00C9CEF6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				DAD4242D1CFF27DB00C9CEF6 /* Music1.mp3 */,
-				DAD4242E1CFF27DB00C9CEF6 /* Music2.mp3 */,
+				DAB748A61D05687800E4BBC0 /* music1.mp3 */,
+				DAB748A71D05687800E4BBC0 /* music2.mp3 */,
+				DAB748A81D05687800E4BBC0 /* music3.mp3 */,
+				DAB748A91D05687800E4BBC0 /* music4.mp3 */,
 				DAD4242B1CFF1D9400C9CEF6 /* Video1.m4v */,
 				DAD424271CFF1CA800C9CEF6 /* Video.mp4 */,
 				DAD424191CFF058D00C9CEF6 /* Book2.pdf */,
 				DAD4241A1CFF058D00C9CEF6 /* Book3.pdf */,
-				DAD4241B1CFF058D00C9CEF6 /* Book4.pdf */,
-				DAD4241C1CFF058D00C9CEF6 /* Book5.pdf */,
-				DAD4241D1CFF058D00C9CEF6 /* Book6.pdf */,
 				DAD424151CFED67C00C9CEF6 /* Book.pdf */,
 			);
 			name = Sources;
@@ -359,19 +356,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAD424221CFF058D00C9CEF6 /* Book6.pdf in Resources */,
 				DAD069281CFDB44A00C7647D /* Podfile in Resources */,
-				DAD424211CFF058D00C9CEF6 /* Book5.pdf in Resources */,
+				DAB748AD1D05687800E4BBC0 /* music4.mp3 in Resources */,
+				DAB748AA1D05687800E4BBC0 /* music1.mp3 in Resources */,
+				DAB748AC1D05687800E4BBC0 /* music3.mp3 in Resources */,
 				DAD2B9521CFC8A0A001A17AD /* Assets.xcassets in Resources */,
+				DAB748AB1D05687800E4BBC0 /* music2.mp3 in Resources */,
 				DAD4241E1CFF058D00C9CEF6 /* Book2.pdf in Resources */,
-				DAD424201CFF058D00C9CEF6 /* Book4.pdf in Resources */,
 				DAD4242C1CFF1D9400C9CEF6 /* Video1.m4v in Resources */,
 				DAD4241F1CFF058D00C9CEF6 /* Book3.pdf in Resources */,
 				DAD069261CFD88B700C7647D /* Default-568h@2x.png in Resources */,
 				DAD424161CFED67C00C9CEF6 /* Book.pdf in Resources */,
-				DAD424301CFF27DB00C9CEF6 /* Music2.mp3 in Resources */,
 				DAD424281CFF1CA800C9CEF6 /* Video.mp4 in Resources */,
-				DAD4242F1CFF27DB00C9CEF6 /* Music1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
