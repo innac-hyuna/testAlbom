@@ -136,17 +136,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		DAA905CF1D007E68003885F0 /* Model */ = {
+		DAA905CF1D007E68003885F0 /* ModelManager */ = {
 			isa = PBXGroup;
 			children = (
 				DAA905CD1D007061003885F0 /* ManagerVideo.swift */,
 				DAA905D11D007F28003885F0 /* ManagerAudio.swift */,
 				DAA905D31D00801D003885F0 /* ManagerBook.swift */,
 			);
-			name = Model;
+			name = ModelManager;
 			sourceTree = "<group>";
 		};
-		DAA905D01D007E9D003885F0 /* Controllers */ = {
+		DAA905D01D007E9D003885F0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				DAD2B94C1CFC8A0A001A17AD /* PasswordViewController.swift */,
@@ -156,7 +156,7 @@
 				DAA905D81D008057003885F0 /* Film */,
 				DAA905D51D00802E003885F0 /* Book */,
 			);
-			name = Controllers;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		DAA905D51D00802E003885F0 /* Book */ = {
@@ -207,8 +207,8 @@
 			children = (
 				DAD2B94A1CFC8A0A001A17AD /* AppDelegate.swift */,
 				DAD069231CFD832700C7647D /* Design.swift */,
-				DAA905D01D007E9D003885F0 /* Controllers */,
-				DAA905CF1D007E68003885F0 /* Model */,
+				DAA905D01D007E9D003885F0 /* ViewControllers */,
+				DAA905CF1D007E68003885F0 /* ModelManager */,
 				DAD2B9511CFC8A0A001A17AD /* Assets.xcassets */,
 				DAD2B9561CFC8A0A001A17AD /* Info.plist */,
 			);

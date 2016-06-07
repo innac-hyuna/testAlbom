@@ -27,6 +27,14 @@ class ManagerAudio: NSObject {
                 arrList.append((aBook, path)) }}
     }
     
+    func getDurationbyUrl (nameUrl: NSURL) -> String {
+        let asset = AVURLAsset( URL: nameUrl, options: nil)
+        let duration = asset.duration
+        let audioDurationSeconds = CMTimeGetSeconds(duration)
+        return audioDurationSeconds.strigTime
+       
+    }
+    
     func setPlayer(url: NSURL) {
        
         do {
@@ -36,7 +44,7 @@ class ManagerAudio: NSObject {
             let fetchError = error as NSError
             print(fetchError)
         }
-        self.audioPlayer.delegate = self       
+        self.audioPlayer.delegate = self
     }
     
     func play() {
@@ -76,8 +84,10 @@ class ManagerAudio: NSObject {
     }
     
     func setTime(val: Float) {
-        
-         audioPlayer.currentTime = Double(val)
+        if val == Float(audioPlayer.duration) {
+            audioPlayer.stop()
+        } else {
+            audioPlayer.currentTime = Double(val) }
     }
     
     func getDurationString() -> String {

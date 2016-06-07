@@ -32,6 +32,8 @@ class MusicViewController: UIViewController {
         volumeSlider = UISlider()
         volumeSlider.enabled = false
         volumeSlider.value = 0.3
+        volumeSlider.tintColor = UIColor.bgFildColor()
+        volumeSlider.setThumbImage(UIImage(named:"Mu"), forState: UIControlState.Normal)
         volumeSlider.addTarget(self, action: #selector(MusicViewController.sliderMov(_:)), forControlEvents: UIControlEvents.ValueChanged)
         volumeSlider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(volumeSlider)
@@ -42,8 +44,8 @@ class MusicViewController: UIViewController {
         
         timeSlider = UISlider()
         timeSlider.minimumValue = 0
-        timeSlider.maximumTrackTintColor = UIColor.borderFildColor()
-        timeSlider.setThumbImage(UIImage(named:"Stop-44"), forState: UIControlState.Normal)
+        timeSlider.tintColor = UIColor.bgFildColor()
+        timeSlider.setThumbImage(UIImage(named:"Mus"), forState: UIControlState.Normal)
         timeSlider.enabled = false
         timeSlider.addTarget(self, action: #selector(MusicViewController.timeMov(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeSlider.translatesAutoresizingMaskIntoConstraints = false
@@ -96,36 +98,7 @@ class MusicViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func timeLeft() {
-        timeLabel.text =  audioData.timeLeft()
-        timeSlider.value = Float(audioData.audioPlayer.currentTime)
-     }
- 
-    func sliderMov(sender: UISlider) {
-        audioData.setVolum(volumeSlider.value)
-    }
-    
-    func timeMov(sender: UISlider) {
-        stop()
-        audioData.setTime(timeSlider.value)
-        print(timeSlider.value)
-        play()
-        
-    }
-    
-    func setSelectRow(notif: NSNotification) {
-        guard let row = notif.object as? Int else { return }
-            tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle )
-        setTimerSetings()
-    }
-    
-    func setTimerSetings()  {
-       timeSlider.value = 0
-       timeLabel.text =  audioData.getDurationString()
-       timeSlider.maximumValue = audioData.getDurationFloat()
-    }
-    
-    func setLayout() {
+       func setLayout() {
         
         compactConstraint.append(NSLayoutConstraint(
             item: buttonPlay,
@@ -185,7 +158,7 @@ class MusicViewController: UIViewController {
             toItem: topBar,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 25))
+            constant: 23))
         compactConstraint.append(NSLayoutConstraint(
             item: volumeSlider,
             attribute: NSLayoutAttribute.Leading,
@@ -227,7 +200,7 @@ class MusicViewController: UIViewController {
             toItem: volumeSlider,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 45))
+            constant: 35))
         compactConstraint.append(NSLayoutConstraint(
             item: timeLabel,
             attribute: NSLayoutAttribute.Leading,
@@ -274,29 +247,49 @@ class MusicViewController: UIViewController {
          NSLayoutConstraint.activateConstraints(compactConstraint)
     }
     
+    func sliderMov(sender: UISlider) {
+        audioData.setVolum(volumeSlider.value)
+    }
+    
+    func timeMov(sender: UISlider) {
+        stop()
+        audioData.setTime(timeSlider.value)
+        print(timeSlider.value)
+        play()
+        
+    }
+    
+    func setSelectRow(notif: NSNotification) {
+        guard let row = notif.object as? Int else { return }
+        tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle )
+        setTimerSetings()
+    }
+    
+    func setTimerSetings()  {
+        timeSlider.value = 0
+        timeLabel.text =  audioData.getDurationString()
+        timeSlider.maximumValue = audioData.getDurationFloat()
+    }
+    
     func playAction(sender: UIButton) {
-      
-        volumeSlider.enabled = true
-        timeSlider.enabled = true
-        butttonStop.enabled = true
-        buttonPause.enabled = true
-        buttonPlay.enabled = false
+        setButtonEnabled(1)
         play()
        
         }
+    
     func play() {
         audioData.play()
-        audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(MusicViewController.timeLeft), userInfo: nil, repeats: true)
-        
+        audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(MusicViewController.timeLeft), userInfo: nil, repeats: true)
+    }
+    
+    func timeLeft() {
+        timeLabel.text =  audioData.timeLeft()
+        timeSlider.value = Float(audioData.audioPlayer.currentTime)
     }
     
     func stopAction(sender: UIButton) {
         setTimerSetings()
-        volumeSlider.enabled = false
-        timeSlider.enabled = false
-        butttonStop.enabled = false
-        buttonPause.enabled = false
-        buttonPlay.enabled = true
+        setButtonEnabled(3)
         stop()
     }
     
@@ -306,17 +299,40 @@ class MusicViewController: UIViewController {
     }
     
     func pauseAction(sender: UIButton) {
-        volumeSlider.enabled = true
-        timeSlider.enabled = true
-        butttonStop.enabled = true
-        buttonPause.enabled = false
-        buttonPlay.enabled = true
+        setButtonEnabled(2)
         pause()
     }
     
     func pause() {
         audioTimer.invalidate()
         audioData.pause()
+    }
+    
+    func setButtonEnabled(i: Int) {
+        
+        switch i {
+        case 1: //play
+            volumeSlider.enabled = true
+            timeSlider.enabled = true
+            butttonStop.enabled = true
+            buttonPause.enabled = true
+            buttonPlay.enabled = false
+        case 2: //pause
+            volumeSlider.enabled = true
+            timeSlider.enabled = true
+            butttonStop.enabled = true
+            buttonPause.enabled = false
+            buttonPlay.enabled = true
+        case 3: //stop
+            volumeSlider.enabled = false
+            timeSlider.enabled = false
+            butttonStop.enabled = false
+            buttonPause.enabled = false
+            buttonPlay.enabled = true
+        default : break
+            
+        }
+        
     }
 }
 
@@ -331,18 +347,17 @@ extension MusicViewController: UITableViewDataSource {
    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SimpleTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SimpleTableViewCell
         cell.titleLabel.text = audioData.arrList[indexPath.row].0
+        cell.timeLabel.text = audioData.getDurationbyUrl(audioData.arrList[indexPath.row].1)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
-        buttonPlay.enabled = true
+        setButtonEnabled(3) //stop
         audioData.setPlayer(audioData.arrList[indexPath.row].1)
         setTimerSetings()
         audioData.setVolum(volumeSlider.value)
         
     }
-
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return audioData.arrList.count

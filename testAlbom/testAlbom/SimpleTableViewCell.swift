@@ -11,6 +11,7 @@ import UIKit
 class SimpleTableViewCell: UITableViewCell {
 
     var titleLabel: UILabel!
+    var timeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,7 +33,13 @@ class SimpleTableViewCell: UITableViewCell {
         titleLabel.font =  UIFont.HelTextFont(16)
         contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+    
+        timeLabel = UILabel()
+        timeLabel.textColor = UIColor.textColor()
+        timeLabel.font =  UIFont.HelTextFont(16)
+        contentView.addSubview(timeLabel)
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+    
         setupLayout()
     }
     
@@ -56,6 +63,21 @@ class SimpleTableViewCell: UITableViewCell {
                            attribute: NSLayoutAttribute.Leading,
                            multiplier: 1.0,
                            constant: 20).active = true
+        
+        NSLayoutConstraint(item: timeLabel,
+                           attribute: NSLayoutAttribute.CenterY,
+                           relatedBy: NSLayoutRelation.Equal,
+                           toItem: contentView,
+                           attribute: NSLayoutAttribute.CenterY,
+                           multiplier: 1.0,
+                           constant: 0).active = true
+        NSLayoutConstraint(item: timeLabel,
+                           attribute: NSLayoutAttribute.Trailing,
+                           relatedBy: NSLayoutRelation.Equal,
+                           toItem: contentView,
+                           attribute: NSLayoutAttribute.Trailing,
+                           multiplier: 1.0,
+                           constant: -10).active = true
     }
 
 }
