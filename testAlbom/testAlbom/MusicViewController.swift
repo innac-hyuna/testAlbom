@@ -16,10 +16,8 @@ class MusicViewController: UIViewController {
     var audioData: ManagerAudio!
     var compactConstraint: [NSLayoutConstraint] = []
     var buttonPlay: UIButton!
-    var buttonPause: UIButton!
     var buttonPre: UIButton!
     var buttonNext: UIButton!
-    var butttonStop: UIButton!
     var volumeSlider: UISlider!
     var timeSlider: UISlider!
     var timeLabel: UILabel!
@@ -56,19 +54,19 @@ class MusicViewController: UIViewController {
         
         buttonPre = UIButton(type: .Custom) as UIButton
         buttonPre.tag = 1
+        buttonPre.enabled = false
         buttonPre.setImage(UIImage(named: "pre"), forState: .Normal)
         buttonPre.frame = CGRectMake(0, 0, 44, 44)
         buttonPre.addTarget(self, action: #selector(MusicViewController.prenextAction(_:)), forControlEvents: .TouchUpInside)
-        buttonPre.enabled = false
         buttonPre.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonPre)
 
         buttonNext = UIButton(type: .Custom) as UIButton
         buttonNext.tag = 2
+        buttonNext.enabled = false
         buttonNext.setImage(UIImage(named: "next"), forState: .Normal)
         buttonNext.frame = CGRectMake(0, 0, 44, 44)
         buttonNext.addTarget(self, action: #selector(MusicViewController.prenextAction(_:)), forControlEvents: .TouchUpInside)
-        buttonNext.enabled = false
         buttonNext.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonNext)
 
@@ -80,14 +78,6 @@ class MusicViewController: UIViewController {
         buttonPlay.enabled = false
         buttonPlay.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonPlay)
-    
-        buttonPause = UIButton(type: .Custom) as UIButton
-        buttonPause.setImage(UIImage(named: "Pause-44"), forState: .Normal)
-        buttonPause.frame = CGRectMake(0, 0, 44, 44)
-        buttonPause.addTarget(self, action: #selector(MusicViewController.pauseAction(_:)), forControlEvents: .TouchUpInside)
-        buttonPause.enabled = false
-        buttonPause.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buttonPause)
         
         tableView = UITableView()
         tableView.backgroundColor = UIColor(patternImage: UIImage.bgMainImage())
@@ -147,9 +137,10 @@ class MusicViewController: UIViewController {
             attribute: NSLayoutAttribute.Trailing,
             multiplier: 1.0,
             constant: 0))
+
         
         compactConstraint.append(NSLayoutConstraint(
-            item: buttonPause,
+            item: buttonNext,
             attribute: NSLayoutAttribute.Top,
             relatedBy: NSLayoutRelation.Equal,
             toItem: topBar,
@@ -157,27 +148,10 @@ class MusicViewController: UIViewController {
             multiplier: 1.0,
             constant: 20))
         compactConstraint.append(NSLayoutConstraint(
-            item: buttonPause,
+            item: buttonNext,
             attribute: NSLayoutAttribute.Leading,
             relatedBy: NSLayoutRelation.Equal,
             toItem: buttonPlay,
-            attribute: NSLayoutAttribute.Trailing,
-            multiplier: 1.0,
-            constant: 10))
-        
-        compactConstraint.append(NSLayoutConstraint(
-            item: buttonNext,
-            attribute: NSLayoutAttribute.Top,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: topBar,
-            attribute: NSLayoutAttribute.Bottom,
-            multiplier: 1.0,
-            constant: 20))
-        compactConstraint.append(NSLayoutConstraint(
-            item: buttonNext,
-            attribute: NSLayoutAttribute.Leading,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: buttonPause,
             attribute: NSLayoutAttribute.Trailing,
             multiplier: 1.0,
             constant: 10))
@@ -302,11 +276,14 @@ class MusicViewController: UIViewController {
     }
     
     func playAction(sender: UIButton) {
-        play()
+        if audioData.audioPlayer.playing {
+            pause()
+        } else {
+            play() }
     }
     
     func play() {
-        setButtonEnabled(1)
+        setButton(1)
         audioData.play()
         audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(MusicViewController.timeLeft), userInfo: nil, repeats: true)
     }
@@ -321,12 +298,8 @@ class MusicViewController: UIViewController {
         audioData.stop()
     }
     
-    func pauseAction(sender: UIButton) {
-        setButtonEnabled(2)
-        pause()
-    }
-    
     func pause() {
+        setButton(2)
         audioTimer.invalidate()
         audioData.pause()
     }
@@ -357,24 +330,20 @@ class MusicViewController: UIViewController {
     
 
     
-    func setButtonEnabled(i: Int) {
+    func setButton(i: Int) {
         
         switch i {
         case 1: //play
             volumeSlider.enabled = true
             timeSlider.enabled = true
-            buttonPause.enabled = true
-            buttonPlay.enabled = false
-            buttonPre.enabled = true
             buttonNext.enabled = true
+            buttonPre.enabled = true
+            buttonPlay.enabled = true
+            buttonPlay.setImage(UIImage(named: "Pause-44"), forState: .Normal)
         case 2: //pause
             volumeSlider.enabled = true
-            timeSlider.enabled = true           
-            buttonPause.enabled = false
-            buttonPlay.enabled = true
-            buttonPre.enabled = true
-            buttonNext.enabled = true
-            
+            timeSlider.enabled = true
+            buttonPlay.setImage(UIImage(named: "Play-44"), forState: .Normal)
         default : break
             
         }
