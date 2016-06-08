@@ -20,10 +20,12 @@ class ManagerBook {
             let fileFor = aBook.substringFromIndex(aBook.indexOf("."))
         if let bundel = NSBundle.mainBundle().pathForResource(fileName, ofType: fileFor){
             var dic: [String: String] = [:]
+            let pathStr = copyFiles( bundel, fileName: aBook)
             dic["name"] = fileName
-            dic["path"] = copyFiles( bundel, fileName: aBook)
+            dic["path"] = pathStr == "" ? bundel : pathStr
             dic["type"] = fileFor
-            arrList.append(dic) }         
+            arrList.append(dic) }
+         
       }
     }
     
@@ -33,14 +35,18 @@ class ManagerBook {
         let fileManager = NSFileManager.defaultManager()
         let fullDestPath = NSURL(fileURLWithPath: destPath).URLByAppendingPathComponent(fileName)
         let fullDestPathString = fullDestPath.path
+        if  !fileManager.fileExistsAtPath(fullDestPathString!){
+            do{
+                try fileManager.copyItemAtPath(bundlePath, toPath: fullDestPathString!)
+                return fullDestPathString!
+            }catch{
+                print("\n")
+                print(error)
+                return "" }
+        } else {
+            return fullDestPathString! }
         
-        do{
-            try fileManager.copyItemAtPath(bundlePath, toPath: fullDestPathString!)
-        }catch{
-            print("\n")
-            print(error)
-        }
-        return fullDestPathString!
+        
     }
     
    }
