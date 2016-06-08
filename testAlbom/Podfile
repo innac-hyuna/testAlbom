@@ -1,0 +1,5 @@
+use_frameworks!
+pod 'KeychainSwift', '~> 3.0'
+pod 'FolioReaderKit'
+source 'https://github.com/CocoaPods/Specs.git'
+pod 'M13PDFKit', '1.0.2'
