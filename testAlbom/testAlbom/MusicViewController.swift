@@ -96,6 +96,11 @@ class MusicViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MusicViewController.setSelectRow(_:)), name:"PlayerCange", object: nil)
         
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        if audioData.audioPlayer.playing {
+            stop()}
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

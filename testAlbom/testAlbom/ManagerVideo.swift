@@ -26,6 +26,7 @@ class ManagerVideo: FileAlbumManager {
         playerController = AVPlayerViewController()
         playerController.player = player
     }
+    
     func play() {
         player.play()
     }   
