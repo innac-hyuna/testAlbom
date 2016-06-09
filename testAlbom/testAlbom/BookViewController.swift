@@ -78,20 +78,20 @@ extension BookViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SimpleTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SimpleTableViewCell
-        cell.titleLabel.text = bookData.arrList[indexPath.row]["name"]
+        cell.titleLabel.text = bookData.arrList[indexPath.row]["name"] as? String
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
      
-      if  bookData.arrList[indexPath.row]["type"] == ".epub" {
+      if  bookData.arrList[indexPath.row]["type"] as! String == ".epub" {
         let config = FolioReaderConfig()
-        if let path = bookData.arrList[indexPath.row]["path"] {
+        if let path = (bookData.arrList[indexPath.row]["path"] as! NSURL).path {
             FolioReader.presentReader(parentViewController: self, withEpubPath: path , andConfig: config)}
       } else {
       
         let viewer: PDFKBasicPDFViewer = PDFKViewController()  as PDFKBasicPDFViewer
-        let document: PDFKDocument = PDFKDocument(contentsOfFile: bookData.arrList[indexPath.row]["path"] , password: nil)
+        let document: PDFKDocument = PDFKDocument(contentsOfFile: (bookData.arrList[indexPath.row]["path"] as! NSURL).path , password: nil)
         viewer.loadDocument(document)
         navigationController?.pushViewController(viewer, animated: true)
         }

@@ -78,13 +78,13 @@ extension FilmsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SimpleTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SimpleTableViewCell
-        cell.titleLabel.text = videoData.arrList[indexPath.row].0
+        cell.titleLabel.text = videoData.arrList[indexPath.row]["name"] as? String
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let VideoController: VideoViewController = VideoViewController()
-        VideoController.urlVideo = videoData.arrList[indexPath.row].1
+        VideoController.urlVideo = videoData.arrList[indexPath.row]["path"] as! NSURL
         navigationController?.pushViewController(VideoController, animated: true)
     }
     

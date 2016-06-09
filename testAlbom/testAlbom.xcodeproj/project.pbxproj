@@ -36,6 +36,7 @@
 		DAE336A81D08077F00D2E88E /* Book2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAE336A61D08077F00D2E88E /* Book2.pdf */; };
 		DAE336A91D08077F00D2E88E /* Book3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DAE336A71D08077F00D2E88E /* Book3.pdf */; };
 		DAE336AB1D08079D00D2E88E /* PDFKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE336AA1D08079D00D2E88E /* PDFKViewController.swift */; };
+		DAE336AD1D08796500D2E88E /* FileAlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE336AC1D08796500D2E88E /* FileAlbumManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		DAE336A61D08077F00D2E88E /* Book2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book2.pdf; path = testAlbom/Book2.pdf; sourceTree = "<group>"; };
 		DAE336A71D08077F00D2E88E /* Book3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Book3.pdf; path = testAlbom/Book3.pdf; sourceTree = "<group>"; };
 		DAE336AA1D08079D00D2E88E /* PDFKViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFKViewController.swift; sourceTree = "<group>"; };
+		DAE336AC1D08796500D2E88E /* FileAlbumManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAlbumManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				DAA905CD1D007061003885F0 /* ManagerVideo.swift */,
 				DAA905D11D007F28003885F0 /* ManagerAudio.swift */,
 				DAA905D31D00801D003885F0 /* ManagerBook.swift */,
+				DAE336AC1D08796500D2E88E /* FileAlbumManager.swift */,
 			);
 			name = ModelManager;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				DAA8E9E41CFDD709005708C1 /* CategoryViewController.swift in Sources */,
 				DAA8E9E61CFDDAE9005708C1 /* MusicViewController.swift in Sources */,
 				DAD069241CFD832700C7647D /* Design.swift in Sources */,
+				DAE336AD1D08796500D2E88E /* FileAlbumManager.swift in Sources */,
 				DAA8E9EA1CFDE66D005708C1 /* BookViewController.swift in Sources */,
 				DAA8E9E81CFDE25E005708C1 /* SimpleTableViewCell.swift in Sources */,
 				DAD2B94D1CFC8A0A001A17AD /* PasswordViewController.swift in Sources */,

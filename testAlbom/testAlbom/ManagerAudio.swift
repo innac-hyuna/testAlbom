@@ -9,23 +9,14 @@
 import UIKit
 import AVFoundation
 
-class ManagerAudio: NSObject {
+class ManagerAudio: FileAlbumManager {
     
     var audioPlayer: AVAudioPlayer!
     var volume: Float = 0.0
-    var rand: Bool = false
-    var url: NSURL = NSURL()   
-    var arr = ["music1", "music2", "music3", "music4"]
-    var arrList = [(String, NSURL)]()
     
-    override init() {
-        
-        audioPlayer = AVAudioPlayer()
-       
-        for aBook in arr {
-            if let path = NSBundle.mainBundle().URLForResource(aBook, withExtension: "mp3", subdirectory: nil, localization: nil) {
-                arrList.append((aBook, path)) }}
-    }
+    init() {
+        super.init(arr: ["music1.mp3", "music2.mp3", "music3.mp3", "music4.mp3"], nameDir: "audios")
+        audioPlayer = AVAudioPlayer() }
     
     func getDurationbyUrl (nameUrl: NSURL) -> String {
         let asset = AVURLAsset( URL: nameUrl, options: nil)
@@ -51,7 +42,6 @@ class ManagerAudio: NSObject {
         dispatch_async(dispatch_get_main_queue(), {
             self.audioPlayer.prepareToPlay()
             self.audioPlayer.play()
-            //print("play")
         })
         
     }
@@ -59,7 +49,7 @@ class ManagerAudio: NSObject {
     func playRandom() {
         let row = randomNumber()
         NSNotificationCenter.defaultCenter().postNotificationName("PlayerCange", object: row, userInfo: nil)
-        setPlayer(arrList[row].1)
+        setPlayer(arrList[row]["path"] as! NSURL)
         play()
     }
     
@@ -70,12 +60,10 @@ class ManagerAudio: NSObject {
     func stop() {
         audioPlayer.stop()
         audioPlayer.currentTime = 0
-       // print("stop")
     }
     
     func pause() {
-        audioPlayer.pause()
-       // print("pause")
+        audioPlayer.pause()       
     }
     
     func setVolum(val: Float) {

@@ -21,7 +21,7 @@ class VideoViewController: UIViewController {
         topBar = self.topLayoutGuide
         
         videoData = ManagerVideo()
-        videoData.setPlayer(urlVideo)        
+        videoData.setVideoPlayer(urlVideo)
         self.addChildViewController(videoData.playerController)
         self.view.addSubview(videoData.playerController.view)
         videoData.playerController.view.frame = self.view.frame

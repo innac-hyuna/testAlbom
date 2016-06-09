@@ -11,23 +11,17 @@ import AVFoundation
 import AVKit
 
 
-class ManagerVideo {
+class ManagerVideo: FileAlbumManager {
 
-    var url: NSURL = NSURL()
-    var arr = ["Video.mp4", "Video1.m4v"]
-    var arrList = [(String, NSURL)]()
     var playerController: AVPlayerViewController!
     var player: AVPlayer!
     
     init() {
-        for aBook in arr {
-            let fileName = aBook.substringToIndex(aBook.indexOf("."))
-            let fileFor = aBook.substringFromIndex(aBook.indexOf("."))
-            if let path = NSBundle.mainBundle().URLForResource(fileName, withExtension: fileFor, subdirectory: nil, localization: nil) {
-                arrList.append((aBook, path)) }}    
+       super.init(arr: ["Video.mp4", "Video1.m4v"] , nameDir: "videos")
+ 
     }
     
-    func setPlayer(urlVideo: NSURL) {
+    func setVideoPlayer(urlVideo: NSURL) {
         player = AVPlayer(URL: urlVideo)
         playerController = AVPlayerViewController()
         playerController.player = player

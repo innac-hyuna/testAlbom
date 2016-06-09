@@ -322,7 +322,7 @@ class MusicViewController: UIViewController {
     
     func setPlayer(indexPath: NSIndexPath) {
         curentSec = indexPath
-        audioData.setPlayer(audioData.arrList[indexPath.row].1)
+        audioData.setPlayer((audioData.arrList[indexPath.row]["path"] as! NSURL))
         setTimerSetings()
         audioData.setVolum(volumeSlider.value)
         play()
@@ -361,8 +361,8 @@ extension MusicViewController: UITableViewDataSource {
     
    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SimpleTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SimpleTableViewCell
-        cell.titleLabel.text = audioData.arrList[indexPath.row].0
-        cell.timeLabel.text = audioData.getDurationbyUrl(audioData.arrList[indexPath.row].1)
+        cell.titleLabel.text = audioData.arrList[indexPath.row]["name"] as? String
+        cell.timeLabel.text = audioData.getDurationbyUrl((audioData.arrList[indexPath.row]["path"] as! NSURL))
         return cell
     }
     
