@@ -15,7 +15,7 @@ class ManagerAudio: FileAlbumManager {
     var volume: Float = 0.0
     
     init() {
-        super.init(arr: ["music1.mp3", "music2.mp3", "music3.mp3", "music4.mp3"], nameDir: "audios")
+        super.init(nameDir: "audios")
         audioPlayer = AVAudioPlayer() }
     
     func getDurationbyUrl (nameUrl: NSURL) -> String {

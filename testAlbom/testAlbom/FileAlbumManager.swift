@@ -13,12 +13,10 @@ class FileAlbumManager: NSObject {
     let fileManager = NSFileManager.defaultManager()
     var albumsPath: NSURL!
     var arrList: [Dictionary<String, AnyObject>] = []
-    var arr: [String] = []
     var nameDir: String = ""
    
-    init(arr: [String], nameDir: String) {
+    init(nameDir: String) {
         super.init()
-        self.arr = arr
         self.nameDir = nameDir
         createAlbumDir()
     }
@@ -26,8 +24,7 @@ class FileAlbumManager: NSObject {
     func createAlbumDir() {
         let destPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
         albumsPath = NSURL(fileURLWithPath: destPath).URLByAppendingPathComponent(nameDir)
-        var con = []
-
+      
         // for bug books copy all time
         if nameDir == "books" {
             if  fileManager.fileExistsAtPath(albumsPath.path!) {
@@ -39,25 +36,18 @@ class FileAlbumManager: NSObject {
         if  !fileManager.fileExistsAtPath(albumsPath.path!) {
             do {
                 try fileManager.createDirectoryAtPath(albumsPath.path!, withIntermediateDirectories: false, attributes: nil)
-                for aAlbum in arr {
-                    let fileName = aAlbum.substringToIndex(aAlbum.indexOf("."))
-                    let fileFor = aAlbum.substringFromIndex(aAlbum.indexOf("."))
-                    if let bundel = NSBundle.mainBundle().pathForResource(fileName, ofType: fileFor){
-                        copyFiles( bundel, fileName: aAlbum)}}
-                
+                   let bundel = "\(NSBundle.mainBundle().bundlePath)/\(nameDir)"
+                        for aAlbum in getListofResource(bundel){
+                           copyFiles("\(bundel)/\(aAlbum)", fileName: aAlbum) }
+                           
             }
             catch { print(error) }
         }
         
-        do{ con = try fileManager.contentsOfDirectoryAtPath(albumsPath.path!)}
-        catch{
-          print(error)
-        }
-        
-        for aAlbum: String in con as! [String] {
+        for aAlbum: String in getListofResource(albumsPath.path!) {
             let fileName = aAlbum.substringToIndex(aAlbum.indexOf("."))
             let fileFor = aAlbum.substringFromIndex(aAlbum.indexOf("."))
-            let fullDestPath = albumsPath.URLByAppendingPathComponent(aAlbum)
+            let fullDestPath = albumsPath.URLByAppendingPathComponent(aAlbum) 
             var dic: [String: AnyObject] = [:]
             dic["name"] = fileName
             dic["path"] = fullDestPath
@@ -65,19 +55,28 @@ class FileAlbumManager: NSObject {
             arrList.append(dic) }
     }
     
+    func getListofResource(bundURl: String) -> [String] {
+        var con = []
+        do{ con = try fileManager.contentsOfDirectoryAtPath(bundURl)}
+        catch{
+            print(error)
+        }
+        return con as! [String]
+    }
+    
     func copyFiles(bundlePath: String, fileName: String) {
         
         let fullDestPath = albumsPath.URLByAppendingPathComponent(fileName)
-        let fullDestPathString = fullDestPath.path
+        if let fullDestPathString = fullDestPath.path {
         
-        if  !fileManager.fileExistsAtPath(fullDestPathString!) {
+        if  !fileManager.fileExistsAtPath(fullDestPathString) {
             do {
-                try fileManager.copyItemAtPath(bundlePath, toPath: fullDestPathString!)
+                try fileManager.copyItemAtPath(bundlePath, toPath: fullDestPathString)
             }catch{
                 print("\n")
                 print(error)
             }
-        }
+            }}
     }
 
     

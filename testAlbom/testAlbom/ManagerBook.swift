@@ -11,7 +11,7 @@ import UIKit
 class ManagerBook: FileAlbumManager {
     
      init() {
-        super.init(arr: ["Book1.epub", "Book2.epub", "Book3.pdf", "Book2.pdf"], nameDir: "books")
+        super.init(nameDir: "books")
     }
     
   }

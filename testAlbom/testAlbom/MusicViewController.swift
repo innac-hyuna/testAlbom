@@ -309,9 +309,9 @@ class MusicViewController: UIViewController {
         if (curentSec) != nil   {
             let cRow = curentSec.row
             if sender.tag == 1 {
-                curentSec = NSIndexPath(forItem: cRow == 0 ? audioData.arr.count - 1 : cRow - 1, inSection: curentSec.section)
+                curentSec = NSIndexPath(forItem: cRow == 0 ? audioData.arrList.count - 1 : cRow - 1, inSection: curentSec.section)
             } else {
-                curentSec = NSIndexPath(forItem: cRow == audioData.arr.count - 1 ? 0 : cRow + 1, inSection: curentSec.section)}
+                curentSec = NSIndexPath(forItem: cRow == audioData.arrList.count - 1 ? 0 : cRow + 1, inSection: curentSec.section)}
             
         }  else {
           curentSec = NSIndexPath.init(forItem: 0, inSection: 0)

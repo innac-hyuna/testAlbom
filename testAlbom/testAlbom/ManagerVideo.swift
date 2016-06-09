@@ -17,7 +17,7 @@ class ManagerVideo: FileAlbumManager {
     var player: AVPlayer!
     
     init() {
-       super.init(arr: ["Video.mp4", "Video1.m4v"] , nameDir: "videos")
+       super.init(nameDir: "videos")
  
     }
     

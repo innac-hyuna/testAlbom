@@ -88,10 +88,9 @@ extension BookViewController: UITableViewDataSource {
         let config = FolioReaderConfig()
         if let path = (bookData.arrList[indexPath.row]["path"] as! NSURL).path {
             FolioReader.presentReader(parentViewController: self, withEpubPath: path , andConfig: config)}
-      } else {
-      
+      } else {        
         let viewer: PDFKBasicPDFViewer = PDFKViewController()  as PDFKBasicPDFViewer
-        let document: PDFKDocument = PDFKDocument(contentsOfFile: (bookData.arrList[indexPath.row]["path"] as! NSURL).path , password: nil)
+        let document: PDFKDocument? = PDFKDocument(contentsOfFile: (bookData.arrList[indexPath.row]["path"] as! NSURL).path , password: nil)
         viewer.loadDocument(document)
         navigationController?.pushViewController(viewer, animated: true)
         }
