@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class MusicViewController: UIViewController {
-
+    
     var tableView: UITableView!
     var topBar: UILayoutSupport!
     var audioData: ManagerAudio!
@@ -23,13 +23,13 @@ class MusicViewController: UIViewController {
     var timeLabel: UILabel!
     var curentSec: NSIndexPath!
     var audioTimer: NSTimer!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         topBar = self.topLayoutGuide
-    
+        
         volumeSlider = UISlider()
         volumeSlider.enabled = false
         volumeSlider.value = 0.3
@@ -38,7 +38,7 @@ class MusicViewController: UIViewController {
         volumeSlider.addTarget(self, action: #selector(MusicViewController.sliderMov(_:)), forControlEvents: UIControlEvents.ValueChanged)
         volumeSlider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(volumeSlider)
-     
+        
         timeLabel = UILabel()
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timeLabel)
@@ -60,7 +60,7 @@ class MusicViewController: UIViewController {
         buttonPre.addTarget(self, action: #selector(MusicViewController.prenextAction(_:)), forControlEvents: .TouchUpInside)
         buttonPre.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonPre)
-
+        
         buttonNext = UIButton(type: .Custom) as UIButton
         buttonNext.tag = 2
         buttonNext.enabled = false
@@ -69,13 +69,14 @@ class MusicViewController: UIViewController {
         buttonNext.addTarget(self, action: #selector(MusicViewController.prenextAction(_:)), forControlEvents: .TouchUpInside)
         buttonNext.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonNext)
-
+        
         
         buttonPlay = UIButton(type: .Custom) as UIButton
         buttonPlay.setImage(UIImage(named: "Play-44"), forState: .Normal)
         buttonPlay.frame = CGRectMake(0, 0, 44, 44)
         buttonPlay.addTarget(self, action: #selector(MusicViewController.playAction(_:)), forControlEvents: .TouchUpInside)
         buttonPlay.enabled = false
+        buttonPlay.tag = 0
         buttonPlay.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonPlay)
         
@@ -98,16 +99,17 @@ class MusicViewController: UIViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        if audioData.audioPlayer.playing {
+        
+        if buttonPlay.tag == 1 {
             stop()}
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-       func setLayout() {
+    func setLayout() {
         
         compactConstraint.append(NSLayoutConstraint(
             item: buttonPre,
@@ -142,7 +144,7 @@ class MusicViewController: UIViewController {
             attribute: NSLayoutAttribute.Trailing,
             multiplier: 1.0,
             constant: 0))
-
+        
         
         compactConstraint.append(NSLayoutConstraint(
             item: buttonNext,
@@ -253,7 +255,7 @@ class MusicViewController: UIViewController {
             multiplier: 1.0,
             constant: 0))
         
-         NSLayoutConstraint.activateConstraints(compactConstraint)
+        NSLayoutConstraint.activateConstraints(compactConstraint)
     }
     
     func sliderMov(sender: UISlider) {
@@ -319,10 +321,10 @@ class MusicViewController: UIViewController {
                 curentSec = NSIndexPath(forItem: cRow == audioData.arrList.count - 1 ? 0 : cRow + 1, inSection: curentSec.section)}
             
         }  else {
-          curentSec = NSIndexPath.init(forItem: 0, inSection: 0)
+            curentSec = NSIndexPath.init(forItem: 0, inSection: 0)
         }
-         tableView.selectRowAtIndexPath(curentSec, animated: true, scrollPosition: UITableViewScrollPosition.Top)
-         setPlayer(curentSec)
+        tableView.selectRowAtIndexPath(curentSec, animated: true, scrollPosition: UITableViewScrollPosition.Top)
+        setPlayer(curentSec)
     }
     
     func setPlayer(indexPath: NSIndexPath) {
@@ -332,8 +334,6 @@ class MusicViewController: UIViewController {
         audioData.setVolum(volumeSlider.value)
         play()
     }
-    
-
     
     func setButton(i: Int) {
         
@@ -345,10 +345,13 @@ class MusicViewController: UIViewController {
             buttonPre.enabled = true
             buttonPlay.enabled = true
             buttonPlay.setImage(UIImage(named: "Pause-44"), forState: .Normal)
+            buttonPlay.tag = 1
         case 2: //pause
             volumeSlider.enabled = true
             timeSlider.enabled = true
             buttonPlay.setImage(UIImage(named: "Play-44"), forState: .Normal)
+            buttonPlay.tag = 0
+            
         default : break
             
         }
@@ -358,13 +361,13 @@ class MusicViewController: UIViewController {
 
 extension MusicViewController: UITableViewDelegate {
     func  tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-      return 44
+        return 44
     }
 }
 
 extension MusicViewController: UITableViewDataSource {
     
-   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: SimpleTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SimpleTableViewCell
         cell.titleLabel.text = audioData.arrList[indexPath.row]["name"] as? String
         cell.timeLabel.text = audioData.getDurationbyUrl((audioData.arrList[indexPath.row]["path"] as! NSURL))
@@ -372,11 +375,11 @@ extension MusicViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-         setPlayer(indexPath)
+        setPlayer(indexPath)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return audioData.arrList.count
+        return audioData.arrList.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
