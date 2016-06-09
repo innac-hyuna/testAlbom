@@ -32,11 +32,11 @@ class ManagerBook {
             
         }
         catch { print(error) }
-    } else {
-        do{ con = try fileManager.contentsOfDirectoryAtPath(booksPath.path!)}
-        catch{
-            print(error)
-        }
+    }
+    do{ con = try fileManager.contentsOfDirectoryAtPath(booksPath.path!)}
+    catch{
+    print(error)
+        
    }
     
     for aBook in con as! [String] {
