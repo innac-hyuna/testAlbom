@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4EB49200DC5D8B71FF215F59 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6FEC72B1C15A37994A13008 /* Pods.framework */; };
+		DA33CFE01D0B0BFE00451F58 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA33CFDF1D0B0BFE00451F58 /* Const.swift */; };
 		DA3585EF1D099229009E3FAB /* books in Resources */ = {isa = PBXBuildFile; fileRef = DA3585EE1D099229009E3FAB /* books */; };
 		DA3585F11D09923A009E3FAB /* videos in Resources */ = {isa = PBXBuildFile; fileRef = DA3585F01D09923A009E3FAB /* videos */; };
 		DA3585F31D099244009E3FAB /* audios in Resources */ = {isa = PBXBuildFile; fileRef = DA3585F21D099244009E3FAB /* audios */; };
@@ -53,6 +54,7 @@
 		2480ABB84FCDBF1E5AAF9A2F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		47C81D7BFA35F7BB77505AF3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A6FEC72B1C15A37994A13008 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA33CFDF1D0B0BFE00451F58 /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		DA3585EE1D099229009E3FAB /* books */ = {isa = PBXFileReference; lastKnownFileType = folder; name = books; path = testAlbom/books; sourceTree = "<group>"; };
 		DA3585F01D09923A009E3FAB /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; name = videos; path = testAlbom/videos; sourceTree = "<group>"; };
 		DA3585F21D099244009E3FAB /* audios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audios; path = testAlbom/audios; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				DAA905CF1D007E68003885F0 /* ModelManager */,
 				DAD2B9511CFC8A0A001A17AD /* Assets.xcassets */,
 				DAD2B9561CFC8A0A001A17AD /* Info.plist */,
+				DA33CFDF1D0B0BFE00451F58 /* Const.swift */,
 			);
 			path = testAlbom;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				DAA905D21D007F28003885F0 /* ManagerAudio.swift in Sources */,
 				DAE336AB1D08079D00D2E88E /* PDFKViewController.swift in Sources */,
 				DAD2B94B1CFC8A0A001A17AD /* AppDelegate.swift in Sources */,
+				DA33CFE01D0B0BFE00451F58 /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

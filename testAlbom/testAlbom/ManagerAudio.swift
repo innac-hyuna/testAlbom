@@ -13,10 +13,12 @@ class ManagerAudio: FileAlbumManager {
     
     var audioPlayer: AVAudioPlayer!
     var volume: Float = 0.0
+    var rowId: Int = 0
     
     init() {
         super.init(nameDir: "audios")
-        audioPlayer = AVAudioPlayer() }
+        audioPlayer = AVAudioPlayer()
+       }
     
     func getDurationbyUrl (nameUrl: NSURL) -> String {
         let asset = AVURLAsset( URL: nameUrl, options: nil)
@@ -26,16 +28,16 @@ class ManagerAudio: FileAlbumManager {
        
     }
     
-    func setPlayer(url: NSURL) {
+    func setPlayer(url: NSURL, indRow: Int) {
        
         do {
             try audioPlayer = AVAudioPlayer(contentsOfURL: url)
-            
         } catch {
             let fetchError = error as NSError
             print(fetchError)
         }
         self.audioPlayer.delegate = self
+        
     }
     
     func play() {
@@ -47,12 +49,29 @@ class ManagerAudio: FileAlbumManager {
     }
     
     func playRandom() {
-        let row = randomNumber()
-        NSNotificationCenter.defaultCenter().postNotificationName("PlayerCange", object: row, userInfo: nil)
-        setPlayer(arrList[row]["path"] as! NSURL)
+        rowId = randomNumber()
+        NSNotificationCenter.defaultCenter().postNotificationName(notification.nConst, object: rowId, userInfo: nil)
+        setPlayer(arrList[rowId]["path"] as! NSURL, indRow: rowId)
         play()
     }
     
+     func playPrew() {
+        rowId = rowId == 0 ? arrList.count - 1 : rowId - 1
+         NSNotificationCenter.defaultCenter().postNotificationName(notification.nConst, object: rowId, userInfo: nil)
+        setPlayer(arrList[rowId]["path"] as! NSURL, indRow: rowId)
+        print(rowId)
+        play()
+    }
+    
+   func playNext() {
+         rowId =  rowId == arrList.count - 1 ? 0 : rowId + 1
+         NSNotificationCenter.defaultCenter().postNotificationName(notification.nConst, object: rowId, userInfo: nil)
+         setPlayer(arrList[rowId]["path"] as! NSURL, indRow: rowId)
+         print(rowId)
+         play()
+    }
+
+
     func timeLeft() -> String {
       return (audioPlayer.duration - audioPlayer.currentTime).strigTime
     }
@@ -102,7 +121,10 @@ extension NSTimeInterval {
 extension ManagerAudio: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully
         flag: Bool) {
-        playRandom()
+        if NSUserDefaults.standardUserDefaults().boolForKey(defUsers.musicrandom){
+            playRandom()
+        }else {
+            playNext() }
     }
     
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer,

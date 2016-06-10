@@ -22,6 +22,7 @@ class ManagerVideo: FileAlbumManager {
     }
     
     func setVideoPlayer(urlVideo: NSURL) {
+        
         player = AVPlayer(URL: urlVideo)
         playerController = AVPlayerViewController()
         playerController.player = player
