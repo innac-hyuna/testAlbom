@@ -81,7 +81,6 @@ class MusicViewController: UIViewController {
         buttonRandom.frame = CGRectMake(0, 0, 44, 44)
         buttonRandom.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonRandom)
-
         
         buttonPre = UIButton(type: .Custom) as UIButton
         buttonPre.tag = 1
@@ -100,7 +99,6 @@ class MusicViewController: UIViewController {
         buttonNext.addTarget(self, action: #selector(MusicViewController.nextAction(_:)), forControlEvents: .TouchUpInside)
         buttonNext.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonNext)
-
         
         buttonPlay = UIButton(type: .Custom) as UIButton
         buttonPlay.setImage(UIImage(named: buttonPlayImg), forState: .Normal)
@@ -208,8 +206,7 @@ class MusicViewController: UIViewController {
             toItem: buttonNext,
             attribute: NSLayoutAttribute.Trailing,
             multiplier: 1.0,
-            constant: 0))
-   
+            constant: 0))   
         
         compactConstraint.append(NSLayoutConstraint(
             item: buttonRandom,
@@ -218,7 +215,7 @@ class MusicViewController: UIViewController {
             toItem: topBar,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 20))
+            constant: 15))
         compactConstraint.append(NSLayoutConstraint(
             item: buttonRandom,
             attribute: NSLayoutAttribute.Leading,
@@ -243,7 +240,7 @@ class MusicViewController: UIViewController {
             toItem: buttonPlay,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 25))
+            constant: 15))
         compactConstraint.append(NSLayoutConstraint(
             item: timeSlider,
             attribute: NSLayoutAttribute.Leading,
@@ -260,7 +257,7 @@ class MusicViewController: UIViewController {
             toItem: volumeSlider,
             attribute: NSLayoutAttribute.Bottom,
             multiplier: 1.0,
-            constant: 35))
+            constant: 25))
         compactConstraint.append(NSLayoutConstraint(
             item: timeLabel,
             attribute: NSLayoutAttribute.Leading,

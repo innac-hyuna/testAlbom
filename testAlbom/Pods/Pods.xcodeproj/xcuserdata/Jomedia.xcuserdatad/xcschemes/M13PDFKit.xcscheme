@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '4D8C13123CBC4D43BDC2AEB0'
+               BlueprintIdentifier = 'DAA79F4302D310EC41995B71'
                BlueprintName = 'M13PDFKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'M13PDFKit.framework'>

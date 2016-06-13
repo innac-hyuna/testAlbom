@@ -8,6 +8,7 @@
 
 import UIKit
 import KeychainSwift
+import PasswordTextField
 
 
 class PasswordViewController: UIViewController {
@@ -20,7 +21,7 @@ class PasswordViewController: UIViewController {
     var loginText: UITextField!
     var passwordView: UIView!
     var passwordImg: UIImageView!
-    var passwordText: UITextField!
+    var passwordText: PasswordTextField!
     var loginButton: UIButton!
     var topBar: UILayoutSupport!
     var compactConstraint = [NSLayoutConstraint]()
@@ -77,11 +78,13 @@ class PasswordViewController: UIViewController {
         passwordImg.translatesAutoresizingMaskIntoConstraints = false
         passwordView.addSubview(passwordImg)
         
-        passwordText = UITextField()
+        passwordText = PasswordTextField()
         passwordText.secureTextEntry = true
         passwordText.delegate = self
         passwordText.tag = 1
         passwordText.textColor = UIColor.textColor()
+        let validationRule = RegexRule(regex:"^[a-zA-Z0-9]+$", errorMessage: "Password must contain only letters and numbers")
+        passwordText.validationRule = validationRule
         passwordText.translatesAutoresizingMaskIntoConstraints = false
         passwordView.addSubview(passwordText)
         
@@ -91,8 +94,7 @@ class PasswordViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(PasswordViewController.loginButtonAction(_:)), forControlEvents: .TouchUpInside)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginButton)
-        setapLayout()
-      
+        setapLayout()      
         
     }
 
@@ -362,7 +364,9 @@ extension PasswordViewController: UITextFieldDelegate {
     }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField.tag == 1 {
-             forLoginButtonAction()
+            if passwordText.isInvalid(){
+                print("Password validation\(passwordText.errorMessage)")
+            } else {forLoginButtonAction()}
         } else {
           self.view.endEditing(true)
         }

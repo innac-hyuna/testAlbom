@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '53B16D937967CD04055D3DEF'
+               BlueprintIdentifier = '1B3190FCC3DCC10A5284C417'
                BlueprintName = 'UIMenuItem-CXAImageSupport'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'UIMenuItem_CXAImageSupport.framework'>

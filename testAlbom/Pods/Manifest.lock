@@ -12,6 +12,7 @@ PODS:
   - KeychainSwift (3.0.16)
   - M13PDFKit (1.0.2):
     - TTOpenInAppActivity
+  - PasswordTextField (1.0.3)
   - SSZipArchive (1.2)
   - TTOpenInAppActivity (1.0)
   - UIMenuItem-CXAImageSupport (0.0.1)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - FolioReaderKit
   - KeychainSwift (~> 3.0)
   - M13PDFKit (= 1.0.2)
+  - PasswordTextField
 
 SPEC CHECKSUMS:
   AEXML: 716fb0a8decba4a3517324a71fee3685b30233d2
@@ -29,6 +31,7 @@ SPEC CHECKSUMS:
   JSQWebViewController: eaa6bd68d9e1426ae25ade99c9bbde4c6cdd4120
   KeychainSwift: a5bb85cd498ce2217b55e055ec59e9268d83384c
   M13PDFKit: bc121a55ccb8ddfcf3982f1a5a8592b9f492cd73
+  PasswordTextField: f4e0867042f7b00046ede38c2b8067602affa0dc
   SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
   TTOpenInAppActivity: c2218fe419d03ddd4ffb1f07d52d66e0d213d0d4
   UIMenuItem-CXAImageSupport: 2945e2af4487414caad801ed8ff6ac8db274e986

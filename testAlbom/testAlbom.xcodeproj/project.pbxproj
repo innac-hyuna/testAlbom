@@ -66,6 +66,7 @@
 		DAA905CD1D007061003885F0 /* ManagerVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerVideo.swift; sourceTree = "<group>"; };
 		DAA905D11D007F28003885F0 /* ManagerAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerAudio.swift; sourceTree = "<group>"; };
 		DAA905D31D00801D003885F0 /* ManagerBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerBook.swift; sourceTree = "<group>"; };
+		DAC903CC1D0EA3240083774F /* mp3lame-for-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "mp3lame-for-iOS"; sourceTree = "<group>"; };
 		DAD069231CFD832700C7647D /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		DAD069251CFD88B700C7647D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DAD069271CFDB44A00C7647D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -114,6 +115,7 @@
 		34324F9031027B85C332EACE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAC903CC1D0EA3240083774F /* mp3lame-for-iOS */,
 				A6FEC72B1C15A37994A13008 /* Pods.framework */,
 			);
 			name = Frameworks;
